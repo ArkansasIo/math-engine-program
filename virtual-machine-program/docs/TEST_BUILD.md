@@ -1,0 +1,3 @@
+# Test Build
+The authoritative Windows test build runs on windows-2022 through GitHub Actions. It configures Visual Studio 2022 x64, compiles vm1024, vm1024-cli, vm1024-dashboard, and every registered test, runs CTest, then packages the CLI, dashboard, configuration, and demo metadata into VirtualMachine1024-Windows-x64.zip.
+Local equivalent: cmake -S virtual-machine-program -B virtual-machine-program/build -G "Visual Studio 17 2022" -A x64; cmake --build virtual-machine-program/build --config Release --parallel; ctest --test-dir virtual-machine-program/build -C Release --output-on-failure.
