@@ -2,33 +2,183 @@ openapi: 3.0.3
 info:
   title: AxiomForge Math API
   version: v1
-  description: Draft API contract; no HTTP server is currently implemented.
+  description: API contract for the AxiomForge development platform.
 servers:
   - url: /api/v1
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Error:
+      type: object
+      properties:
+        error: { type: string }
+    Credentials:
+      type: object
+      required: [email, password]
+      properties:
+        email: { type: string, format: email }
+        password: { type: string, minLength: 12, maxLength: 128 }
+security:
+  - bearerAuth: []
 paths:
-  /health:
+  /health/live:
     get:
-      summary: Health endpoint (planned)
+      security: []
+      summary: Liveness probe
       responses:
-        "200":
-          description: Service status
-  /math/prime/{n}:
+        "200": { description: Process is alive }
+  /health/ready:
     get:
-      summary: Check whether an integer is prime (planned)
+      security: []
+      summary: Database readiness probe
+      responses:
+        "200": { description: Service ready }
+        "503": { description: Database unavailable }
+  /auth/register:
+    post:
+      security: []
+      summary: Register a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Credentials' }
+      responses:
+        "201": { description: User registered and access token issued }
+        "409": { description: Email already registered }
+  /auth/login:
+    post:
+      security: []
+      summary: Log in
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/Credentials' }
+      responses:
+        "200": { description: Access token issued }
+        "401": { description: Invalid credentials }
+        "429": { description: Rate limited }
+  /projects:
+    get:
+      summary: List projects accessible to the caller
+      responses:
+        "200": { description: Project list }
+        "401": { description: Authentication required }
+    post:
+      summary: Create a project and default branch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name: { type: string, maxLength: 120 }
+                description: { type: string, maxLength: 2000 }
+      responses:
+        "201": { description: Project created }
+  /projects/{projectId}/members:
+    parameters:
+      - { name: projectId, in: path, required: true, schema: { type: string, format: uuid } }
+    get:
+      summary: List project members
+      responses:
+        "200": { description: Member list }
+        "403": { description: Forbidden }
+    post:
+      summary: Add or change a project member role
+      responses:
+        "200": { description: Membership updated }
+        "403": { description: Owner required }
+    delete:
+      summary: Remove a non-owner member
       parameters:
-        - name: n
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
+        - { name: userId, in: path, required: true, schema: { type: string, format: uuid } }
       responses:
-        "200":
-          description: Primality result
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  n: { type: integer, format: int64 }
-                  prime: { type: boolean }
+        "204": { description: Member removed }
+        "403": { description: Owner required }
+  /revisions/{projectId}/branches:
+    get:
+      summary: List project branches
+      parameters:
+        - { name: projectId, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200": { description: Branch list }
+  /revisions/{projectId}/branches/{branchId}/revisions:
+    post:
+      summary: Commit a mathematical document revision
+      parameters:
+        - { name: projectId, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: branchId, in: path, required: true, schema: { type: string, format: uuid } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [message, document]
+              properties:
+                message: { type: string, maxLength: 500 }
+                document: { type: object, additionalProperties: true }
+                parentRevisionId: { type: string, format: uuid, nullable: true }
+                expectedHeadId: { type: string, format: uuid, nullable: true }
+      responses:
+        "201": { description: Revision committed }
+        "409": { description: Branch head changed; resolve conflict }
+        "422": { description: Invalid parent revision }
+  /revisions/{projectId}/reviews:
+    get:
+      summary: List project reviews
+      parameters:
+        - { name: projectId, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200": { description: Review list }
+    post:
+      summary: Create a review
+      parameters:
+        - { name: projectId, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "201": { description: Review created }
+  /revisions/{projectId}/releases:
+    get:
+      summary: List project releases
+      parameters:
+        - { name: projectId, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200": { description: Release list }
+    post:
+      summary: Create a release draft
+      parameters:
+        - { name: projectId, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "201": { description: Release draft created }
+  /jobs:
+    post:
+      summary: Submit a bounded math or validation job
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [projectId, kind, input]
+              properties:
+                projectId: { type: string, format: uuid }
+                kind: { type: string, enum: [math.evaluate, build, test, file.validate] }
+                input: { type: object, additionalProperties: true }
+      responses:
+        "202": { description: Job queued }
+  /jobs/{jobId}:
+    get:
+      summary: Get job status and output
+      parameters:
+        - { name: jobId, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200": { description: Job state }
+        "404": { description: Job not found }
