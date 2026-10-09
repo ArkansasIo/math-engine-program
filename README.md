@@ -1,46 +1,50 @@
 # AxiomForge Mathematics Platform
 
-**AxiomForge** is a C++23 mathematics-engine scaffold for a modular, extensible mathematics knowledge platform.
+**AxiomForge** is a C++23 mathematics core and collaborative mathematical development platform.
 
 - **Developer:** AxiomForge Labs
 - **Version:** 0.1.0-dev
-- **Build:** 1001
-- **Build ID:** AXF-0.1.0-dev-1001
+- **Build:** 1001 · **Build ID:** `AXF-0.1.0-dev-1001`
 - **Product ID:** `com.axiomforge.math-platform`
-- **Primary language:** C++23
+- **API:** AxiomForge Math API v1 at `/api/v1`
 - **License:** MIT
 - **Project codename:** Master Mathematics
 
-## Current scope
+## Platform components
 
-- CMake-based C++23 project structure
-- Arithmetic operations and number-theory utilities
-- A mathematics knowledge graph and query interface
-- Command-line application and console-style GUI shell
-- Menu/window abstractions and mock graphics renderer
-- Build metadata, project manifest, and validation script
-- Update/patch policy documentation and example patch manifest
-- OpenAPI v1 contract draft
-- Starter Prolog mathematics rules and Lua example scripts
+- **C++23 core:** arithmetic, number theory, knowledge graph, graph traversal/query, CLI, UI/renderer abstractions.
+- **TypeScript API:** login/registration, short-lived bearer tokens, project CRUD foundations, role checks, branch/revision commits with optimistic concurrency, reviews, releases, job submission and polling.
+- **PostgreSQL:** migrations for users, projects, memberships, branches, revisions, reviews, jobs, collaboration events, releases, and audit log.
+- **Web client:** React + TypeScript workspace with Math, Team, Debug, Build, and Review modes.
+- **Collaboration:** WebSocket event relay for authorized project subscriptions.
+- **Worker:** bounded mathematical evaluation and basic file validation. Arbitrary builds or submitted code are not executed.
+- **Automation:** GitHub Actions CI, Dockerfiles, and Docker Compose development stack.
+- **Scripting/documentation:** starter Prolog rules, illustrative Lua example, OpenAPI draft, build identity and update-policy docs.
 
-## Build
+## Quick start
 
-Requirements: CMake 3.20+ and a C++23-capable compiler.
-
+### C++23 core
 ```sh
-cmake -S . -B build
-cmake --build build --config Release
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --parallel
 ctest --test-dir build --output-on-failure
 ```
 
-Run the CLI executable produced by the build. Use `--help` or `help` if supported by the selected target.
+### Full development stack
+Requirements: Docker Compose v2.
 
-## Project status
+```sh
+docker compose up --build
+```
 
-This is an **early development scaffold**, not a complete computer algebra system or production release. The GUI and renderer are placeholders; Lua and Prolog are not yet integrated into the C++ runtime; the OpenAPI file is a contract draft rather than a running HTTP server; and the update manager does not yet provide signed, networked patch installation. Symbolic calculus, arbitrary precision, and the comprehensive mathematics graph remain planned work.
+- Web client: `http://localhost:3000`
+- API liveness: `http://localhost:8080/api/v1/health/live`
+- API readiness: `http://localhost:8080/api/v1/health/ready`
 
-See `docs/` for identity/versioning, API, security, build/release, project-tree, and update-policy notes.
+The default Compose credentials/secrets are for local development only. Override `POSTGRES_PASSWORD` and `JWT_SECRET` before using the stack outside a private development environment. SQL initialization scripts run automatically only when the PostgreSQL data volume is created for the first time. For an existing database, apply migrations in order as described in [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
 
-## Repository
+## Project status and limits
 
-This repository is the canonical source location for the AxiomForge Mathematics Platform. Changes should preserve the distinction between implemented functionality and planned capabilities.
+This remains a development platform, not a production release or a complete computer algebra system. The C++ GUI/renderer are mock abstractions; the React client currently exposes a JSON document editor and limited job controls, with review/release UI still incomplete. The API's event hub is in-process (not multi-instance durable), WebSocket authentication currently uses a short-lived token in the URL, and the job worker does not run arbitrary builds or code. Account recovery, refresh-token revocation, durable event fanout, signed release artifacts, secure automatic updates, arbitrary precision, symbolic calculus, and full mathematics taxonomy remain future work.
+
+See [docs/V4_1_IMPLEMENTATION.md](docs/V4_1_IMPLEMENTATION.md), [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/SECURITY_REVIEW.md](docs/SECURITY_REVIEW.md), and [server/README.md](server/README.md) for details.
