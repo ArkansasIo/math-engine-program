@@ -12,3 +12,5 @@ export async function commitRevision(projectId:string,branchId:string,message:st
 export async function submitJob(projectId:string,operation:string,a:number,b?:number){return request<{job:Job}>("/jobs",{method:"POST",body:JSON.stringify({projectId,kind:"math.evaluate",input:{operation,a,...(b===undefined?{}:{b})}})})}
 export async function getJob(id:string){return request<{job:Job}>(`/jobs/${id}`)}
 export function eventSocket(projectId:string,onEvent:(event:unknown)=>void){if(!token)return()=>{};const url=new URL(base.replace(/^http/,"ws")+"/ws");url.searchParams.set("token",token);const ws=new WebSocket(url);ws.onopen=()=>ws.send(JSON.stringify({type:"subscribe",projectId}));ws.onmessage=e=>{try{onEvent(JSON.parse(e.data))}catch{}};return()=>ws.close();}
+export async function createBranch(projectId:string,name:string){return request<{branch:Branch}>(`/revisions/${projectId}/branches`,{method:"POST",body:JSON.stringify({name})})}
+export async function revisionHistory(projectId:string,branchId:string){return (await request<{revisions:Revision[]}>(`/revisions/${projectId}/branches/${branchId}/revisions`)).revisions}
