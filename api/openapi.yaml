@@ -1,0 +1,34 @@
+openapi: 3.0.3
+info:
+  title: AxiomForge Math API
+  version: v1
+  description: Draft API contract; no HTTP server is currently implemented.
+servers:
+  - url: /api/v1
+paths:
+  /health:
+    get:
+      summary: Health endpoint (planned)
+      responses:
+        "200":
+          description: Service status
+  /math/prime/{n}:
+    get:
+      summary: Check whether an integer is prime (planned)
+      parameters:
+        - name: n
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Primality result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  n: { type: integer, format: int64 }
+                  prime: { type: boolean }
