@@ -4,6 +4,7 @@ import {pool} from "../db/pool";
 import {requireAuth} from "../middleware/auth";
 import {requireProjectRole} from "../services/permissions";
 import {eventHub} from "../services/events";
+import {recordAudit} from "../services/audit";
 
 export const revisionsRouter=Router();
 revisionsRouter.use(requireAuth);
@@ -64,6 +65,7 @@ revisionsRouter.post("/:projectId/branches/:branchId/revisions",async(req,res,ne
   await client.query("UPDATE branches SET head_revision_id=$1 WHERE id=$2",[revision.id,branchId]);
   const eventResult=await client.query("INSERT INTO collaboration_events(project_id,actor_id,event_type,payload) VALUES($1,$2,'revision.created',$3) RETURNING id",[projectId,req.principal!.sub,JSON.stringify({branchId,revisionId:revision.id,parentRevisionId:parent})]);
   await client.query("COMMIT");
+  await recordAudit(req.principal!.sub,projectId,"revision.created",{branchId,revisionId:revision.id,parentRevisionId:parent});
   eventHub.publish({type:"revision.created",projectId,actorId:req.principal!.sub,payload:{branchId,revisionId:revision.id,parentRevisionId:parent},createdAt:new Date().toISOString(),eventId:String(eventResult.rows[0].id)});
   res.status(201).json({revision});
  }catch(e){await client.query("ROLLBACK");next(e);}finally{client.release();}
