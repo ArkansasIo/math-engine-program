@@ -1,0 +1,2 @@
+# File Tree
+The project is organized into include/, src/, tests/, examples/, assembler/, isa/, math/, config/, assets/, scripts/, docs/, and .github/workflows/. C++ engine code is separated from the Windows presentation layer. Documentation describes architecture, API, design, testing, deployment, assets, release, and roadmap.
