@@ -1,7 +1,6 @@
 #include "axiomforge/build_info.hpp"
 #include "axiomforge/core/graph.hpp"
-#include "axiomforge/math/arithmetic.hpp"
-#include "axiomforge/math/number_theory.hpp"
+#include "axiomforge/core/query.hpp"
 #include <iostream>
-#include <sstream>
-int main(){auto g=axf::make_default_graph();std::cout<<AXIOMFORGE_APP_NAME<<" "<<AXIOMFORGE_VERSION<<" (build "<<AXIOMFORGE_BUILD_NUMBER<<")\nType help for commands.\n";std::string line;while(std::cout<<"> "&&std::getline(std::cin,line)){if(line=="quit"||line=="exit")break;if(line=="help"){std::cout<<"about | build-info | math add A B | math prime N | math classify N | math gcd A B | graph children ID | quit\n";continue;}if(line=="about"){std::cout<<AXIOMFORGE_APP_NAME<<" by "<<AXIOMFORGE_DEVELOPER_NAME<<"\n";continue;}if(line=="build-info"){std::cout<<"build_number="<<AXIOMFORGE_BUILD_NUMBER<<"; product_id="<<AXIOMFORGE_PRODUCT_ID<<"\n";continue;}std::istringstream in(line);std::string group,cmd;in>>group>>cmd;if(group=="math"){long long a{},b{};if(cmd=="add"&&in>>a>>b)std::cout<<axf::add(a,b)<<"\n";else if(cmd=="prime"&&in>>a)std::cout<<(axf::is_prime(a)?"true":"false")<<"\n";else if(cmd=="classify"&&in>>a)std::cout<<axf::classify(a)<<"\n";else if(cmd=="gcd"&&in>>a>>b)std::cout<<axf::gcd(a,b)<<"\n";else std::cout<<"Invalid math command\n";}else if(group=="graph"&&cmd=="children"){std::string id;in>>id;for(auto&n:g.children(id))std::cout<<n.id<<"\n";}else std::cout<<"Unknown command. Type help.\n";}return 0;}
+#include <string>
+int main(){auto graph=axf::make_default_graph();axf::QueryEngine engine(graph);std::cout<<AXIOMFORGE_APP_NAME<<" "<<AXIOMFORGE_VERSION<<" (build "<<AXIOMFORGE_BUILD_NUMBER<<")\nType help for commands.\n";std::string line;while(std::cout<<"> "&&std::getline(std::cin,line)){if(line=="quit"||line=="exit")break;if(line=="about"){std::cout<<AXIOMFORGE_APP_NAME<<" by "<<AXIOMFORGE_DEVELOPER_NAME<<"\n";continue;}if(line=="build-info"){std::cout<<"build_number="<<AXIOMFORGE_BUILD_NUMBER<<"; product_id="<<AXIOMFORGE_PRODUCT_ID<<"\n";continue;}std::cout<<engine.execute(line)<<"\n";}return 0;}
