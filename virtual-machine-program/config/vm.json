@@ -1,0 +1,6 @@
+{
+  "host":"windows-x64","isa":"V1024-QISA","integer_bits":1024,"vector_lanes":16,
+  "memory_bytes":1048576,"quantum_simulator":{"enabled":true,"max_qubits":20},
+  "math_engine":{"repository_root":"../","registry":"data/universal-mathematics"},
+  "mode":"software-simulation"
+}
