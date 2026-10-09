@@ -13,7 +13,7 @@
 ## Platform components
 
 - **C++23 core:** arithmetic, number theory, knowledge graph, graph traversal/query, CLI, UI/renderer abstractions.
-- **TypeScript API:** login/registration, short-lived bearer tokens, project CRUD foundations, role checks, branch/revision commits with optimistic concurrency, reviews, releases, job submission and polling.
+- **TypeScript API:** login/registration, short-lived bearer tokens, project CRUD foundations, role checks, branch/revision commits with optimistic concurrency, reviews, releases, job submission/polling, synchronous math evaluation, event history, and owner-only audit queries.
 - **PostgreSQL:** migrations for users, projects, memberships, branches, revisions, reviews, jobs, collaboration events, releases, and audit log.
 - **Web client:** React + TypeScript workspace with Math, Team, Debug, Build, and Review modes.
 - **Collaboration:** WebSocket event relay for authorized project subscriptions.
@@ -45,6 +45,6 @@ The default Compose credentials/secrets are for local development only. Override
 
 ## Project status and limits
 
-This remains a development platform, not a production release or a complete computer algebra system. The C++ GUI/renderer are mock abstractions; the React client provides a JSON document editor, branch/revision workflow, team membership controls, review decisions, release-draft creation, and bounded job controls. A full revision-diff/merge UI and production artifact pipeline remain incomplete. The API's event hub is in-process (not multi-instance durable), WebSocket authentication currently uses a short-lived token in the URL, and the job worker does not run arbitrary builds or code. Account recovery, refresh-token revocation, durable event fanout, signed release artifacts, secure automatic updates, arbitrary precision, symbolic calculus, and full mathematics taxonomy remain future work.
+This remains a development platform, not a production release or a complete computer algebra system. The C++ GUI/renderer are mock abstractions; the React client provides a JSON document editor, branch/revision workflow, team membership controls, review decisions, release-draft creation, and bounded job controls. A full revision-diff/merge UI and production artifact pipeline remain incomplete. The API's event hub is in-process (not multi-instance durable), WebSocket authentication currently uses a short-lived token in the URL, and the job worker does not run arbitrary builds or code. Account recovery, refresh-token revocation, cross-instance live event fanout, signed release artifacts, secure automatic updates, arbitrary precision, symbolic calculus, and full mathematics taxonomy remain future work.
 
 See [docs/CLI_REFERENCE.md](docs/CLI_REFERENCE.md), [docs/MATHEMATICS_MODULES.md](docs/MATHEMATICS_MODULES.md), [docs/V4_1_IMPLEMENTATION.md](docs/V4_1_IMPLEMENTATION.md), [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/SECURITY_REVIEW.md](docs/SECURITY_REVIEW.md), and [server/README.md](server/README.md) for details.
