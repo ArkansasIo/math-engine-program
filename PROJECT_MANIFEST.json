@@ -5,11 +5,36 @@
   "repository": "ArkansasIo/math-engine-program",
   "branch": "main",
   "generated_on": "2026-10-09",
-  "inventory_base_tree_sha": "f3c029a4a1c4634229e27221304a17635291ae56",
-  "file_count": 131,
+  "inventory_base_tree_sha": "0b8ad8b600ebe3bd1eee4816c66442d43f28ef0b",
+  "file_count": 174,
   "manifest_excludes_itself": true,
   "hash_type": "Git blob SHA-1 object identifiers, not SHA-256 file digests",
   "files": [
+    {
+      "path": ".editorconfig",
+      "git_blob_sha": "89fbb4d1f1eb65f1c508fd5af75ec131f1e9116e",
+      "size_bytes": 202
+    },
+    {
+      "path": ".gitattributes",
+      "git_blob_sha": "a5a7c7f81a3146ea414a28e05c75bf00b92e492e",
+      "size_bytes": 102
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md",
+      "git_blob_sha": "ba133c36093d816d97d29284114ff4a1eec8ad56",
+      "size_bytes": 352
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.md",
+      "git_blob_sha": "0f85600558c5f3220920991386235db715da9030",
+      "size_bytes": 251
+    },
+    {
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "git_blob_sha": "9dc9a1c727aed62b6f4bca8e4ac6abcd31fc0399",
+      "size_bytes": 418
+    },
     {
       "path": ".github/dependabot.yml",
       "git_blob_sha": "4002dd2f65056e6fa05ff30f70b0d48b0bb91960",
@@ -17,8 +42,8 @@
     },
     {
       "path": ".github/workflows/ci.yml",
-      "git_blob_sha": "9a2594155f415a31cc4dbdee3d8ce6f800112399",
-      "size_bytes": 1796
+      "git_blob_sha": "07d03466e7f69a9fd6e9a5a8afa52d8f36eae379",
+      "size_bytes": 2093
     },
     {
       "path": ".github/workflows/release.yml",
@@ -31,9 +56,24 @@
       "size_bytes": 208
     },
     {
+      "path": ".npmrc",
+      "git_blob_sha": "d47515c91231f42a61074c6f1ac450cf937a8236",
+      "size_bytes": 39
+    },
+    {
       "path": "CMakeLists.txt",
-      "git_blob_sha": "8aeee8007e0cfa6e3fe97e2d2db97df7683b05f1",
-      "size_bytes": 1618
+      "git_blob_sha": "4192c9b1f6aabe75e5036bf68df7c5fc32b73adc",
+      "size_bytes": 1700
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "git_blob_sha": "e8876fbcd529ed41572004683241e78db4e7f77c",
+      "size_bytes": 361
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "git_blob_sha": "a345df3778905413f50f1a37ff3e48c47f9336b9",
+      "size_bytes": 881
     },
     {
       "path": "LICENSE",
@@ -46,9 +86,14 @@
       "size_bytes": 3445
     },
     {
+      "path": "SECURITY.md",
+      "git_blob_sha": "3fa2d2b326d512da874f7181b0e08cb240b63a52",
+      "size_bytes": 1016
+    },
+    {
       "path": "api/openapi.yaml",
-      "git_blob_sha": "ea409dc1244f44b53457ab587c6036d532ce64c4",
-      "size_bytes": 7902
+      "git_blob_sha": "f1a21ec94bf19254224e7eda2b2a2737c5aa6c26",
+      "size_bytes": 9513
     },
     {
       "path": "apps/cli/main.cpp",
@@ -74,6 +119,11 @@
       "path": "client/.env.example",
       "git_blob_sha": "0c0e1f56e4bea67d0b29a8fd5615231316022355",
       "size_bytes": 47
+    },
+    {
+      "path": "client/.npmrc",
+      "git_blob_sha": "e59ae88785a14727b331fb4d6cbb7043bb000fa7",
+      "size_bytes": 22
     },
     {
       "path": "client/Dockerfile",
@@ -102,13 +152,33 @@
     },
     {
       "path": "client/src/App.tsx",
-      "git_blob_sha": "9514aa1696db581c39c05a775804b79c216974a1",
-      "size_bytes": 17157
+      "git_blob_sha": "41e9456a6946b5b9b1335307a9878bc1c7743453",
+      "size_bytes": 16975
     },
     {
       "path": "client/src/api.ts",
       "git_blob_sha": "4f4e166721dc5e2fb325fa2f016e4463df086538",
       "size_bytes": 4553
+    },
+    {
+      "path": "client/src/components/EmptyState.tsx",
+      "git_blob_sha": "56c2d94a54eb7050d4678a1f434ba27d32b67957",
+      "size_bytes": 259
+    },
+    {
+      "path": "client/src/components/ModeBar.tsx",
+      "git_blob_sha": "ed77e555d10465e8284db45d8db3c630e29ab452",
+      "size_bytes": 413
+    },
+    {
+      "path": "client/src/components/RevisionHistory.tsx",
+      "git_blob_sha": "4a224311a0cc4c3513097527ac5c53cbde562c32",
+      "size_bytes": 528
+    },
+    {
+      "path": "client/src/components/StatusPill.tsx",
+      "git_blob_sha": "40811933711a55a737ed2b18457745111d163f6a",
+      "size_bytes": 194
     },
     {
       "path": "client/src/main.tsx",
@@ -126,6 +196,16 @@
       "size_bytes": 979
     },
     {
+      "path": "client/src/utils/format.ts",
+      "git_blob_sha": "fc091398d297be4a9fba8a3a7405899b1d20e1ee",
+      "size_bytes": 354
+    },
+    {
+      "path": "client/src/utils/validate.ts",
+      "git_blob_sha": "5675425af3c98131c95d00ee7ef2c0c5bcf0cee5",
+      "size_bytes": 401
+    },
+    {
       "path": "client/src/vite-env.d.ts",
       "git_blob_sha": "11f02fe2a0061d6e6e1f271b21da95423b448b32",
       "size_bytes": 38
@@ -139,6 +219,21 @@
       "path": "client/vite.config.ts",
       "git_blob_sha": "7378fc5fb616afba7b22801a911d6b164c475962",
       "size_bytes": 140
+    },
+    {
+      "path": "config/api.json",
+      "git_blob_sha": "eedd35bdb252a46e25c3a107a93ea40c759928d3",
+      "size_bytes": 451
+    },
+    {
+      "path": "config/feature-flags.json",
+      "git_blob_sha": "9c3190abaee3cee0e042873c70ced8e705f4dc04",
+      "size_bytes": 646
+    },
+    {
+      "path": "config/math-engine.json",
+      "git_blob_sha": "1721395c9b7b6a07c32aa69289598a01a7a0d07f",
+      "size_bytes": 392
     },
     {
       "path": "config/product.json",
@@ -166,9 +261,19 @@
       "size_bytes": 222
     },
     {
+      "path": "docs/API_ERROR_CODES.md",
+      "git_blob_sha": "8e9fc73e4d5b96058537ca3dbc648c37e45f0727",
+      "size_bytes": 799
+    },
+    {
       "path": "docs/ARCHITECTURE.md",
-      "git_blob_sha": "55fb6632e840d3924c9d94a771d763b73bc29a36",
-      "size_bytes": 881
+      "git_blob_sha": "9a2c8b8202f02dbb0374ea0a5326990e5857dd33",
+      "size_bytes": 990
+    },
+    {
+      "path": "docs/AUTHENTICATION.md",
+      "git_blob_sha": "b32680a09b83c0f4ce47e226b2dbcf10c780fec8",
+      "size_bytes": 824
     },
     {
       "path": "docs/BUILD_AND_RELEASE.md",
@@ -181,9 +286,19 @@
       "size_bytes": 1483
     },
     {
+      "path": "docs/COLLABORATION.md",
+      "git_blob_sha": "ed4a8d82eca20d0d1324ba50153e07083cbb89f8",
+      "size_bytes": 836
+    },
+    {
       "path": "docs/DATABASE_MIGRATIONS.md",
       "git_blob_sha": "d5a96855edb058554cecdfe1e7a27b9f677639bd",
       "size_bytes": 735
+    },
+    {
+      "path": "docs/DEPLOYMENT.md",
+      "git_blob_sha": "fbbef00d8747ace9d3e1a17e64fe3bb063a7682e",
+      "size_bytes": 963
     },
     {
       "path": "docs/DEVELOPMENT.md",
@@ -196,9 +311,24 @@
       "size_bytes": 522
     },
     {
+      "path": "docs/JOBS_AND_WORKERS.md",
+      "git_blob_sha": "a412e999f01a58c54802217077a5ed4135d47dd5",
+      "size_bytes": 795
+    },
+    {
       "path": "docs/MATHEMATICS_MODULES.md",
       "git_blob_sha": "d333275094bd2a39a18d237369abeca48ca7c126",
       "size_bytes": 1815
+    },
+    {
+      "path": "docs/MATH_ENGINE.md",
+      "git_blob_sha": "f960aaa3f1363aecc1989bd21d37528ddf4b622f",
+      "size_bytes": 1309
+    },
+    {
+      "path": "docs/OPERATIONS.md",
+      "git_blob_sha": "4fba703bc594b7dc800f78b9c7d0e100b521222b",
+      "size_bytes": 1370
     },
     {
       "path": "docs/PROJECT_TREE.md",
@@ -229,6 +359,11 @@
       "path": "docs/STATUS.md",
       "git_blob_sha": "3466c0ebbb6d290a5c64f80ab4b68bdae5249299",
       "size_bytes": 727
+    },
+    {
+      "path": "docs/TESTING.md",
+      "git_blob_sha": "fceb8b5f075446cce7f8f4c8815600e015b55a22",
+      "size_bytes": 711
     },
     {
       "path": "docs/UPDATES_PATCHES.md",
@@ -286,9 +421,19 @@
       "size_bytes": 400
     },
     {
+      "path": "include/axiomforge/math/equations.hpp",
+      "git_blob_sha": "a6a657587baa839895c29c240c0ffa11ac93ff5a",
+      "size_bytes": 228
+    },
+    {
       "path": "include/axiomforge/math/geometry.hpp",
       "git_blob_sha": "e66fdc984ea66eeb606e1ca7d055ed8d3a3e0f1b",
       "size_bytes": 230
+    },
+    {
+      "path": "include/axiomforge/math/interpolation.hpp",
+      "git_blob_sha": "055aae8655368707102f8e7f708a16f93eaa8130",
+      "size_bytes": 155
     },
     {
       "path": "include/axiomforge/math/logic.hpp",
@@ -309,6 +454,11 @@
       "path": "include/axiomforge/math/numerical.hpp",
       "git_blob_sha": "74cc0acc4939f20cead830ce688c477edfb749d6",
       "size_bytes": 412
+    },
+    {
+      "path": "include/axiomforge/math/optimization.hpp",
+      "git_blob_sha": "225e6304d7997fb3a06de02b9a04cb3dc11edd49",
+      "size_bytes": 290
     },
     {
       "path": "include/axiomforge/math/polynomial.hpp",
@@ -376,6 +526,11 @@
       "size_bytes": 730
     },
     {
+      "path": "scripts/check_manifest.py",
+      "git_blob_sha": "0f7cf63bfcd38564f4c8ca669602edcbe193e783",
+      "size_bytes": 1046
+    },
+    {
       "path": "scripts/generate_build_info.py",
       "git_blob_sha": "0074fdf89c8eab89d1fa13bcdb92d5e659f40ad7",
       "size_bytes": 404
@@ -384,6 +539,11 @@
       "path": "scripts/validate_project.py",
       "git_blob_sha": "760f6cf0160615877471456d57f7e2431c9458ec",
       "size_bytes": 712
+    },
+    {
+      "path": "scripts/validate_release.py",
+      "git_blob_sha": "51d5e9dbede724ba6e274a1552e37e7aaba1a99d",
+      "size_bytes": 868
     },
     {
       "path": "server/.dockerignore",
@@ -402,8 +562,8 @@
     },
     {
       "path": "server/README.md",
-      "git_blob_sha": "bb64a2110e2c381300178c786f4b6ccfcddbd6a9",
-      "size_bytes": 1340
+      "git_blob_sha": "640d1521d7eb50207f3e7d5f8f78f638fd65da9e",
+      "size_bytes": 1545
     },
     {
       "path": "server/migrations/001_initial.sql",
@@ -416,9 +576,14 @@
       "size_bytes": 913
     },
     {
+      "path": "server/migrations/003_query_and_audit_indexes.sql",
+      "git_blob_sha": "aad76315a8c1e1f2cb785ca70c065fd001aa19c6",
+      "size_bytes": 503
+    },
+    {
       "path": "server/package.json",
-      "git_blob_sha": "454ad83aaaca962896706ab8a4b0a627b7602f14",
-      "size_bytes": 1112
+      "git_blob_sha": "16190bb46fd89c6c2016c082cede26ddf1389b7a",
+      "size_bytes": 1143
     },
     {
       "path": "server/src/auth/tokens.ts",
@@ -447,8 +612,8 @@
     },
     {
       "path": "server/src/index.ts",
-      "git_blob_sha": "760fbebaf069da9f10b9543b87f8251fc7e55cb3",
-      "size_bytes": 1698
+      "git_blob_sha": "fc963b52550d01fc6004e2b2a0ff205134475b3f",
+      "size_bytes": 2010
     },
     {
       "path": "server/src/middleware/auth.ts",
@@ -466,9 +631,24 @@
       "size_bytes": 421
     },
     {
+      "path": "server/src/middleware/requestId.ts",
+      "git_blob_sha": "0abc37101009601eb48f71cc30486e54259ab77a",
+      "size_bytes": 430
+    },
+    {
+      "path": "server/src/routes/audit.ts",
+      "git_blob_sha": "53eafff045cb662b9ef4c332f47ea4d5bf0d2646",
+      "size_bytes": 664
+    },
+    {
       "path": "server/src/routes/auth.ts",
       "git_blob_sha": "d08635e570c1be7091f648010862c597e935cb19",
       "size_bytes": 1421
+    },
+    {
+      "path": "server/src/routes/events.ts",
+      "git_blob_sha": "8d7ff101d966661e31021950d178eb78a6031251",
+      "size_bytes": 1097
     },
     {
       "path": "server/src/routes/health.ts",
@@ -481,34 +661,54 @@
       "size_bytes": 1303
     },
     {
+      "path": "server/src/routes/math.ts",
+      "git_blob_sha": "652cc5383034bf52f8ec7cb41c32db747241eb97",
+      "size_bytes": 897
+    },
+    {
       "path": "server/src/routes/members.ts",
-      "git_blob_sha": "d66af0d439242ed12ce8260bfd7e74be34172c9c",
-      "size_bytes": 2135
+      "git_blob_sha": "95ff6790322c1eafc3aa73bd46031cc005aabe17",
+      "size_bytes": 2400
     },
     {
       "path": "server/src/routes/projects.ts",
-      "git_blob_sha": "19c3cec27dfb84632dcf0505e0fef1eae5f5d963",
-      "size_bytes": 1471
+      "git_blob_sha": "b519cb3c0473a42f7d504ced75414e3c677481d5",
+      "size_bytes": 1605
     },
     {
       "path": "server/src/routes/releases.ts",
-      "git_blob_sha": "a09e66cb44c532f41ba0f21c87d3143d2e540f08",
-      "size_bytes": 2329
+      "git_blob_sha": "c17500f780cb37a569f0925f924104220fdeac82",
+      "size_bytes": 2639
     },
     {
       "path": "server/src/routes/reviews.ts",
-      "git_blob_sha": "ebb42d6ac17c3f61850fe74199e9aff7e55952c2",
-      "size_bytes": 2206
+      "git_blob_sha": "5a1db6ef490d1efcf4e9cbe1774cec1348522888",
+      "size_bytes": 2468
     },
     {
       "path": "server/src/routes/revisions.ts",
-      "git_blob_sha": "1e2f8244d91641a8b1cc965bd48a97571ae8f2f8",
-      "size_bytes": 4840
+      "git_blob_sha": "897ab37f9ecf233036feb5e251d41fbb47fa3eec",
+      "size_bytes": 5015
+    },
+    {
+      "path": "server/src/services/audit.ts",
+      "git_blob_sha": "945a1874364353449fb56a3e5a13a7317ce274f0",
+      "size_bytes": 641
     },
     {
       "path": "server/src/services/events.ts",
       "git_blob_sha": "819f3768e81c5f7430dd061746e34ab3b7b35047",
       "size_bytes": 426
+    },
+    {
+      "path": "server/src/services/jobState.test.ts",
+      "git_blob_sha": "c6b3609f6262fcb8ac36774ace5aa631edbe554e",
+      "size_bytes": 680
+    },
+    {
+      "path": "server/src/services/jobState.ts",
+      "git_blob_sha": "b7bcd3c54d34bf798b85c78fbd67d83b5f9b547e",
+      "size_bytes": 534
     },
     {
       "path": "server/src/services/mathEvaluator.ts",
@@ -576,9 +776,19 @@
       "size_bytes": 1085
     },
     {
+      "path": "src/math/equations.cpp",
+      "git_blob_sha": "1d90eaa7e95f8bed9f466090080b881dca1bd1e8",
+      "size_bytes": 784
+    },
+    {
       "path": "src/math/geometry.cpp",
       "git_blob_sha": "e01290c6be4aa9d4243737ca6347fef3393a6333",
       "size_bytes": 631
+    },
+    {
+      "path": "src/math/interpolation.cpp",
+      "git_blob_sha": "e4ada720034db5492d6a57ec695009c2a44d000f",
+      "size_bytes": 620
     },
     {
       "path": "src/math/logic.cpp",
@@ -599,6 +809,11 @@
       "path": "src/math/numerical.cpp",
       "git_blob_sha": "bcb8a3c0705e94496179d92d77b05a261e64df2e",
       "size_bytes": 1351
+    },
+    {
+      "path": "src/math/optimization.cpp",
+      "git_blob_sha": "a1f79929feb90762b7a43f4a86fc40e4cc70e5d2",
+      "size_bytes": 804
     },
     {
       "path": "src/math/polynomial.cpp",
@@ -647,8 +862,8 @@
     },
     {
       "path": "tests/test_main.cpp",
-      "git_blob_sha": "846466b4350efd977c29d972a3bd5998a924a239",
-      "size_bytes": 2741
+      "git_blob_sha": "1c7b5ad685fd35481e1536a6b98ff2f26db7614d",
+      "size_bytes": 3383
     },
     {
       "path": "updates/README.md",
