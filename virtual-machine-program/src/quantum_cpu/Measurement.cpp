@@ -1,0 +1,2 @@
+#include "quantum/Measurement.hpp"
+namespace quantum { double probability_zero(const QubitRegister&r,std::size_t q){if(q>=r.qubits())return 0;const auto bit=std::size_t(1)<<q;double p=0;for(std::size_t i=0;i<r.state().size();++i)if(!(i&bit))p+=std::norm(r.state()[i]);return p;} double probability_one(const QubitRegister&r,std::size_t q){return q>=r.qubits()?0.0:1.0-probability_zero(r,q);} }
