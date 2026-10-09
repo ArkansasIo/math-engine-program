@@ -1,0 +1,2 @@
+# Native Desktop Dashboard
+The Windows dashboard target is vm1024-dashboard. It is native Win32/GDI, uses the vm1024 C++23 library, and has no Qt, Electron, SDL, or browser runtime dependency. The layout mirrors the supplied concept: command toolbar, system overview, program editor, CPU panel, GPU/QPU panel, execution console, and output/results. config/ui.json defines the visual tokens. assets/ui contains branding that can be replaced without changing the engine.
