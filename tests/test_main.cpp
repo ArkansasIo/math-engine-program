@@ -14,6 +14,9 @@
 #include "axiomforge/math/probability.hpp"
 #include "axiomforge/math/units.hpp"
 #include "axiomforge/math/complex.hpp"
+#include "axiomforge/math/equations.hpp"
+#include "axiomforge/math/interpolation.hpp"
+#include "axiomforge/math/optimization.hpp"
 #include <set>
 #include <cmath>
 #include <cassert>
@@ -32,4 +35,8 @@ int main(){assert(axf::add(2,3)==5);assert(axf::multiply(-4,5)==-20);assert(axf:
  assert(std::abs(axf::math::normal_cdf(0)-0.5)<1e-12);assert(std::abs(axf::math::binomial_pmf(2,1,0.5)-0.5)<1e-12);
  assert(std::abs(axf::math::convert_unit(1,axf::math::Unit::Kilometer,axf::math::Unit::Meter)-1000)<1e-12);
  assert(axf::math::complex_magnitude({3,4})==5);
+ auto roots=axf::math::solve_quadratic(1,0,-4);assert(roots.size()==2);assert(std::abs(roots[0].real()-2.0)<1e-12);assert(std::abs(roots[1].real()+2.0)<1e-12);
+ auto complexRoots=axf::math::solve_quadratic(1,0,1);assert(complexRoots.size()==2);assert(std::abs(std::abs(complexRoots[0].imag())-1.0)<1e-12);
+ assert(std::abs(axf::math::lagrange_interpolate({0,1},{0,1},0.5)-0.5)<1e-12);
+ auto minimum=axf::math::golden_section_minimize([](double x){return (x-2)*(x-2);},-5,5);assert(std::abs(minimum.x-2.0)<1e-5);
  return 0;}
