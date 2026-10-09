@@ -8,8 +8,9 @@
     "build": "tsc -p tsconfig.json",
     "start": "node dist/index.js",
     "dev": "tsx watch src/index.ts",
-    "test": "node --test dist/**/*.test.js",
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+    "test": "node --test",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "worker": "node dist/workers/workerMain.js"
   },
   "engines": {
     "node": ">=22"
