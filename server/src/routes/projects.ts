@@ -1,0 +1,9 @@
+import {Router} from "express";
+import {z} from "zod";
+import {pool} from "../db/pool";
+import {requireAuth} from "../middleware/auth";
+export const projectsRouter=Router();
+const createSchema=z.object({name:z.string().trim().min(1).max(120),description:z.string().max(2000).default("")});
+projectsRouter.use(requireAuth);
+projectsRouter.get("/",async(req,res,next)=>{try{const r=await pool.query("SELECT p.id,p.name,p.description,p.created_at,m.role FROM projects p JOIN project_members m ON m.project_id=p.id WHERE m.user_id=$1 ORDER BY p.created_at DESC",[req.principal!.sub]);res.json({projects:r.rows});}catch(e){next(e);}});
+projectsRouter.post("/",async(req,res,next)=>{const client=await pool.connect();try{const v=createSchema.parse(req.body);await client.query("BEGIN");const p=await client.query("INSERT INTO projects(name,description,created_by) VALUES($1,$2,$3) RETURNING id,name,description,created_at",[v.name,v.description,req.principal!.sub]);const project=p.rows[0];await client.query("INSERT INTO project_members(project_id,user_id,role) VALUES($1,$2,'owner')",[project.id,req.principal!.sub]);const b=await client.query("INSERT INTO branches(project_id,name,created_by) VALUES($1,'main',$2) RETURNING id,name",[project.id,req.principal!.sub]);await client.query("COMMIT");res.status(201).json({project,defaultBranch:b.rows[0]});}catch(e){await client.query("ROLLBACK");next(e);}finally{client.release();}});
