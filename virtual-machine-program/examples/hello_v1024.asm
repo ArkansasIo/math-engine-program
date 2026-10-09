@@ -1,0 +1,3 @@
+; 1024-bit CPU example
+IADD1024 R1,R2,R3
+VADD1024 V1,V2,V3
