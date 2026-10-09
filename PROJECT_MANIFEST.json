@@ -5,7 +5,7 @@
   "repository": "ArkansasIo/math-engine-program",
   "branch": "main",
   "generated_on": "2026-10-09",
-  "inventory_base_tree_sha": "0b8ad8b600ebe3bd1eee4816c66442d43f28ef0b",
+  "inventory_base_tree_sha": "529a564a47d924c7744bbce4e0856838baa58fad",
   "file_count": 174,
   "manifest_excludes_itself": true,
   "hash_type": "Git blob SHA-1 object identifiers, not SHA-256 file digests",
@@ -82,8 +82,8 @@
     },
     {
       "path": "README.md",
-      "git_blob_sha": "d6e86765ace10137da867d2411ec0d712b1e95ee",
-      "size_bytes": 3445
+      "git_blob_sha": "1b122d05252f725cace8006ab828aeb5968003b9",
+      "size_bytes": 3527
     },
     {
       "path": "SECURITY.md",
@@ -332,8 +332,8 @@
     },
     {
       "path": "docs/PROJECT_TREE.md",
-      "git_blob_sha": "99c908080e81cd2c676c70b8bb8354511414ff4e",
-      "size_bytes": 1408
+      "git_blob_sha": "aaab48443cf112572c7ef9247f4b001367ffb2ce",
+      "size_bytes": 1994
     },
     {
       "path": "docs/RELEASING.md",
