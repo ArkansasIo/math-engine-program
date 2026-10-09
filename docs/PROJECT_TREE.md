@@ -1,14 +1,22 @@
 # Project tree
 
-- `apps/cli/`: interactive terminal application
-- `include/axiomforge/core/`: knowledge graph types and interface
-- `include/axiomforge/math/`: arithmetic and number theory APIs
-- `src/core/`: graph implementation
-- `src/math/`: arithmetic and number-theory implementation
-- `tests/`: C++ smoke tests
-- `prolog/`: declarative starter rules
-- `lua/`: illustrative Lua sample (not runtime-integrated)
-- `api/`: OpenAPI draft (not a running service)
-- `config/`: product/runtime/update policy declarations
-- `updates/`: example changelog and patch manifest
-- `docs/`: architecture, status, and release notes
+- apps/cli/: interactive C++ terminal using the query engine
+- apps/gui/: console GUI shell mock
+- include/axiomforge/core/: graph nodes, graph API, query engine
+- include/axiomforge/math/: arithmetic, number theory, polynomials, matrices, statistics, combinatorics, propositional logic, finite sets
+- src/core/: graph and query engine implementation
+- src/math/: numerical and symbolic polynomial modules
+- include/axiomforge/api/ and src/api/: API metadata
+- include/axiomforge/system/ and src/system/: update manager foundation
+- include/axiomforge/ui/ and src/ui/: menu and window models
+- include/axiomforge/graphics/ and src/graphics/: renderer interface and mock
+- server/src/: TypeScript REST API, authentication, permissions, collaboration events, WebSocket relay, job worker
+- server/migrations/: PostgreSQL schema migrations
+- client/src/: React/TypeScript development workspace
+- api/: OpenAPI contract draft
+- prolog/: declarative starter rules
+- lua/: illustrative Lua sample, not runtime-integrated with C++
+- config/, build/, updates/: identity, runtime/update policy, build snapshot, example patch/release notes
+- scripts/: build identity and project validation helpers
+- tests/: C++ core tests
+- docs/: architecture, API, security, math modules, build and release notes
