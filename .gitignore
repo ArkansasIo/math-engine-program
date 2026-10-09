@@ -13,3 +13,12 @@ dist/
 .DS_Store
 .vscode/
 .idea/
+
+# JavaScript workspaces
+node_modules/
+server/dist/
+client/dist/
+coverage/
+*.tsbuildinfo
+.env.local
+.env.production
