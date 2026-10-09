@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://axiomforge.example/schemas/problem-record.schema.json",
+  "title": "Universal Mathematics Problem Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "subject",
+    "tier",
+    "difficulty_score",
+    "statement",
+    "verification_status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^UMU-[A-Z0-9]+-[A-Z]-[0-9]{4,}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tier": {
+      "enum": [
+        "Elementary",
+        "Middle School",
+        "High School",
+        "Undergraduate",
+        "Graduate",
+        "Research",
+        "Frontier",
+        "Ultra-Frontier"
+      ]
+    },
+    "difficulty_score": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 1500
+    },
+    "statement": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected_result": {
+      "type": [
+        "string",
+        "number",
+        "null"
+      ]
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "solution": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "proof": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "verification_status": {
+      "enum": [
+        "computed",
+        "symbolically_verified",
+        "numerically_verified",
+        "formally_proved",
+        "conjecture",
+        "counterexample_found",
+        "open",
+        "unknown"
+      ]
+    },
+    "verification_notes": {
+      "type": "string"
+    }
+  }
+}
