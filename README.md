@@ -20,6 +20,7 @@
 - **Worker:** bounded mathematical evaluation and basic file validation. Arbitrary builds or submitted code are not executed.
 - **Automation:** GitHub Actions CI, Dockerfiles, and Docker Compose development stack.
 - **Scripting/documentation:** starter Prolog rules, illustrative Lua example, OpenAPI draft, build identity and update-policy docs.
+- **Universal Mathematics data registry:** signed-integer generators and schemas, a five-family term registry, an eight-tier difficulty scale, dimension/problem-record schemas, and a reproducible dataset manifest in `data/universal-mathematics/`.
 
 ## Quick start
 
@@ -29,6 +30,17 @@ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build --parallel
 ctest --test-dir build --output-on-failure
 ```
+
+### Generate a finite integer dataset
+
+The integer domain is unbounded. Generate finite windows on demand:
+
+```sh
+python3 data/universal-mathematics/term-generator.py --start -1000 --end 1000 --format csv --output integers.csv
+python3 data/universal-mathematics/term-generator.py --start -1000 --end 1000 --format jsonl --output integers.jsonl
+```
+
+The output assigns deterministic IDs and records each integer's sign, absolute value, and parity. See [data/universal-mathematics/README.md](data/universal-mathematics/README.md) for the registry contracts and verification rules.
 
 ### Full development stack
 Requirements: Docker Compose v2.
@@ -46,5 +58,7 @@ The default Compose credentials/secrets are for local development only. Override
 ## Project status and limits
 
 This remains a development platform, not a production release or a complete computer algebra system. The C++ GUI/renderer are mock abstractions; the React client provides a JSON document editor, branch/revision workflow, team membership controls, review decisions, release-draft creation, and bounded job controls. A full revision-diff/merge UI and production artifact pipeline remain incomplete. The API's event hub is in-process (not multi-instance durable), WebSocket authentication currently uses a short-lived token in the URL, and the job worker does not run arbitrary builds or code. Account recovery, refresh-token revocation, cross-instance live event fanout, signed release artifacts, secure automatic updates, arbitrary precision, symbolic calculus, and full mathematics taxonomy remain future work.
+
+The Universal Mathematics registry is a data/schema and generator foundation; it does not claim a formally complete taxonomy or a verified solution for every generated problem. External symbolic/numerical computation is evidence, not automatically a formal proof.
 
 See [docs/CLI_REFERENCE.md](docs/CLI_REFERENCE.md), [docs/MATHEMATICS_MODULES.md](docs/MATHEMATICS_MODULES.md), [docs/V4_1_IMPLEMENTATION.md](docs/V4_1_IMPLEMENTATION.md), [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/SECURITY_REVIEW.md](docs/SECURITY_REVIEW.md), and [server/README.md](server/README.md) for details.
