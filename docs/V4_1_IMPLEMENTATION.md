@@ -12,5 +12,5 @@
 - Run SQL migrations before starting the API. The current Compose configuration loads the initial SQL files through PostgreSQL's initialization directory, which runs only for a fresh database volume.
 - Set a unique, high-entropy `JWT_SECRET` in every non-local environment. Configure TLS paths or place the service behind a trusted TLS-terminating proxy.
 - Event history is persisted in PostgreSQL and can be replayed on subscription, but live fanout remains process-local. Multiple API instances still need a shared broker or PostgreSQL LISTEN/NOTIFY strategy.
-- A production job worker, invitation/member-management endpoints, review/release endpoints, refresh-token revocation, CSRF strategy for cookie auth, observability, and formal threat modeling are not complete.
+- A production build/test worker, account invitations for users who have not registered, refresh-token revocation, a cookie-auth CSRF strategy, observability, and formal threat modeling are not complete. Membership, review, and release metadata endpoints are implemented, but artifact signing/distribution and a full revision-diff UI are not.
 - CI configuration is added, but no remote CI run is claimed by this commit.
