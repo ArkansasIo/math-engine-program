@@ -12,6 +12,17 @@ services:
       interval: 5s
       timeout: 3s
       retries: 10
+  migrate:
+    build: ./server
+    command: ["node", "dist/db/migrate.js"]
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgres://axiomforge:${POSTGRES_PASSWORD:-local-development-only}@postgres:5432/axiomforge
+      JWT_SECRET: ${JWT_SECRET:-local-development-secret-change-before-deploy-000000}
+      JWT_ISSUER: axiomforge
+    depends_on:
+      postgres:
+        condition: service_healthy
   api:
     build: ./server
     environment:
@@ -23,8 +34,8 @@ services:
       CORS_ORIGIN: http://localhost:3000
     ports: ["8080:8080"]
     depends_on:
-      postgres:
-        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
   worker:
     build: ./server
     command: ["node", "dist/workers/workerMain.js"]
@@ -34,8 +45,8 @@ services:
       JWT_SECRET: ${JWT_SECRET:-local-development-secret-change-before-deploy-000000}
       JWT_ISSUER: axiomforge
     depends_on:
-      postgres:
-        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
   client:
     build:
       context: ./client
