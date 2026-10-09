@@ -1,3 +1,10 @@
 #include "math/MathBridge.hpp"
 #include <cassert>
-int main(){using mathbridge::MathBridge;assert(MathBridge::name(MathBridge::Operation::Add1024)=="MATH-1024-ADD");assert(MathBridge::name(MathBridge::Operation::NormalizeState)=="QMATH-NORMALIZE");return 0;}
+#include <string_view>
+int main(){
+ using mathbridge::Operation;
+ assert(mathbridge::name(Operation::Add1024)=="MATH-1024-ADD");
+ assert(mathbridge::name(Operation::NormalizeState)=="QMATH-NORMALIZE");
+ assert(mathbridge::name(Operation::MeasurementProbability)=="QMATH-MEASURE-PROB");
+ return 0;
+}
