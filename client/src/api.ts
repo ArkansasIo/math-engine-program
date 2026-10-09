@@ -14,3 +14,13 @@ export async function getJob(id:string){return request<{job:Job}>(`/jobs/${id}`)
 export function eventSocket(projectId:string,onEvent:(event:unknown)=>void){if(!token)return()=>{};const url=new URL(base.replace(/^http/,"ws")+"/ws");url.searchParams.set("token",token);const ws=new WebSocket(url);ws.onopen=()=>ws.send(JSON.stringify({type:"subscribe",projectId}));ws.onmessage=e=>{try{onEvent(JSON.parse(e.data))}catch{}};return()=>ws.close();}
 export async function createBranch(projectId:string,name:string){return request<{branch:Branch}>(`/revisions/${projectId}/branches`,{method:"POST",body:JSON.stringify({name})})}
 export async function revisionHistory(projectId:string,branchId:string){return (await request<{revisions:Revision[]}>(`/revisions/${projectId}/branches/${branchId}/revisions`)).revisions}
+
+import type {Member,Release,Review} from "./types";
+export async function members(projectId:string){return (await request<{members:Member[]}>(`/projects/${projectId}/members`)).members}
+export async function addMember(projectId:string,email:string,role:"editor"|"reviewer"|"viewer"){return request<{membership:unknown}>(`/projects/${projectId}/members`,{method:"POST",body:JSON.stringify({email,role})})}
+export async function reviews(projectId:string){return (await request<{reviews:Review[]}>(`/revisions/${projectId}/reviews`)).reviews}
+export async function createReview(projectId:string,branchId:string,title:string,body:string){return request<{review:Review}>(`/revisions/${projectId}/reviews`,{method:"POST",body:JSON.stringify({branchId,title,body})})}
+export async function updateReview(projectId:string,reviewId:string,status:"approved"|"changes_requested"|"closed"){return request<{review:Pick<Review,"id"|"status">}>(`/revisions/${projectId}/reviews/${reviewId}`,{method:"PATCH",body:JSON.stringify({status})})}
+export async function releases(projectId:string){return (await request<{releases:Release[]}>(`/revisions/${projectId}/releases`)).releases}
+export async function createRelease(projectId:string,revisionId:string,version:string,channel:"development"|"beta"|"stable"){return request<{release:Release}>(`/revisions/${projectId}/releases`,{method:"POST",body:JSON.stringify({revisionId,version,channel})})}
+export async function publishRelease(projectId:string,releaseId:string){return request<{release:Release}>(`/revisions/${projectId}/releases/${releaseId}/publish`,{method:"POST"})}
