@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "features": {
+    "math_api": true,
+    "project_workspaces": true,
+    "branch_revisions": true,
+    "team_membership": true,
+    "review_workflow": true,
+    "release_metadata": true,
+    "collaboration_event_replay": true,
+    "audit_log": true,
+    "websocket_live_fanout": true,
+    "native_gui": false,
+    "lua_runtime": false,
+    "prolog_runtime": false,
+    "symbolic_expression_parser": false,
+    "arbitrary_precision": false,
+    "signed_auto_updates": false,
+    "isolated_build_worker": false
+  },
+  "note": "Flags document implementation scope; runtime enforcement is not yet wired to every feature."
+}
