@@ -6,6 +6,7 @@ class Memory {
   std::vector<std::uint8_t> data_;
 public:
   explicit Memory(std::size_t bytes);
+  std::size_t size() const noexcept { return data_.size(); }
   std::uint8_t read8(Address) const;
   void write8(Address,std::uint8_t);
 };
