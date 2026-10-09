@@ -18,7 +18,7 @@ jobs:
         run: cmake --build virtual-machine-program/build --config Release --parallel
       - name: Run regression suite
         run: ctest --test-dir virtual-machine-program/build -C Release --output-on-failure
-      - name: Package desktop test build
+      - name: Package desktop test build and assets
         shell: pwsh
         run: |
           $out = "virtual-machine-program/dist/VirtualMachine1024-Windows-x64"
@@ -28,6 +28,10 @@ jobs:
           Copy-Item "virtual-machine-program/config/vm.json" "$out/"
           Copy-Item "virtual-machine-program/config/ui.json" "$out/"
           Copy-Item "virtual-machine-program/examples/dashboard_demo.json" "$out/"
+          Copy-Item "virtual-machine-program/README.md" "$out/"
+          Copy-Item "virtual-machine-program/CHANGELOG.md" "$out/"
+          Copy-Item "virtual-machine-program/assets" "$out/assets" -Recurse
+          Copy-Item "virtual-machine-program/docs" "$out/docs" -Recurse
           Compress-Archive -Path "$out/*" -DestinationPath "virtual-machine-program/dist/VirtualMachine1024-Windows-x64.zip" -Force
       - name: Upload compiled artifact
         uses: actions/upload-artifact@v4
