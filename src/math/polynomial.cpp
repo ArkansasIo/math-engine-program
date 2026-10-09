@@ -1,5 +1,7 @@
 #include "axiomforge/math/polynomial.hpp"
+#include <algorithm>
 #include <cmath>
+#include <utility>
 #include <sstream>
 namespace axf::math {
 Polynomial::Polynomial(std::vector<double> c):coefficients_(std::move(c)){normalize();}
