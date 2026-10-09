@@ -12,6 +12,11 @@ add_library(axiomforge_core
   src/core/query.cpp
   src/math/arithmetic.cpp
   src/math/number_theory.cpp
+  src/math/polynomial.cpp
+  src/math/matrix.cpp
+  src/math/statistics.cpp
+  src/math/combinatorics.cpp
+  src/math/logic.cpp
   src/api/api_info.cpp
   src/system/update_manager.cpp
   src/terminal/terminal.cpp
