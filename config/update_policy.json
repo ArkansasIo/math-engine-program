@@ -1,0 +1,8 @@
+{
+  "channel": "development",
+  "automatic_updates": false,
+  "require_signed_manifests": true,
+  "allow_downgrade": false,
+  "installation_status": "not_implemented",
+  "note": "Policy declaration only; secure signed update installation is not implemented."
+}
