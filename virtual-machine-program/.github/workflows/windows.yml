@@ -15,3 +15,16 @@ jobs:
         run: cmake --build virtual-machine-program/build --config Release
       - name: Test
         run: ctest --test-dir virtual-machine-program/build -C Release --output-on-failure
+      - name: Package dashboard
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force virtual-machine-program/dist | Out-Null
+          Copy-Item virtual-machine-program/build/Release/vm1024-dashboard.exe virtual-machine-program/dist/
+          Copy-Item virtual-machine-program/config/vm.json virtual-machine-program/dist/
+          Copy-Item virtual-machine-program/config/ui.json virtual-machine-program/dist/
+          Compress-Archive -Path virtual-machine-program/dist/* -DestinationPath virtual-machine-program/VirtualMachine1024-Windows-x64.zip -Force
+      - name: Upload dashboard artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: VirtualMachine1024-Windows-x64
+          path: virtual-machine-program/VirtualMachine1024-Windows-x64.zip
