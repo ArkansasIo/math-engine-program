@@ -50,7 +50,14 @@ export function attachWebSockets(server:HttpServer){
      for(const event of pending){const id=Number(event.eventId??0),seen=c.lastSeen.get(projectId)??0;if(id&&id<=seen)continue;if(socket.readyState!==WebSocket.OPEN)break;socket.send(JSON.stringify(event));if(id)c.lastSeen.set(projectId,id);}
      socket.send(JSON.stringify({type:"subscribed",projectId,lastEventId:c.lastSeen.get(projectId)??after}));
     }
-   }catch{socket.send(JSON.stringify({type:"error",error:"invalid_message"}));}
+   }catch{
+    for(const projectId of [...c.replaying]){
+     c.replaying.delete(projectId);
+     const pending=(c.pending.get(projectId)??[]).sort((a,b)=>Number(a.eventId??0)-Number(b.eventId??0));c.pending.delete(projectId);
+     for(const event of pending){if(socket.readyState!==WebSocket.OPEN)break;const id=Number(event.eventId??0),seen=c.lastSeen.get(projectId)??0;if(id&&id<=seen)continue;socket.send(JSON.stringify(event));if(id)c.lastSeen.set(projectId,id);}
+    }
+    socket.send(JSON.stringify({type:"error",error:"sync_failed"}));
+   }
   });
   socket.on("close",()=>clients.delete(c));
  });
