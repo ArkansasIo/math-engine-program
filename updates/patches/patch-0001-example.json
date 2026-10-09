@@ -1,0 +1,10 @@
+{
+  "patch_id": "AXF-PATCH-0001",
+  "target_version": "0.1.1-dev",
+  "channel": "development",
+  "description": "Illustrative patch manifest only",
+  "artifacts": [],
+  "signature": null,
+  "verified": false,
+  "note": "Not installable. Signature and artifact verification are not implemented."
+}
