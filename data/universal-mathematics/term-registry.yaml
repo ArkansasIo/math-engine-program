@@ -1,0 +1,36 @@
+schema_version: "1.0.0"
+title: "Universal Mathematics Infinite Term Registry"
+integer_domain:
+  symbol: "Z"
+  definition: "Z = {..., -3, -2, -1, 0, 1, 2, 3, ...}"
+  positive_integers: "{1, 2, 3, ...}"
+  negative_integers: "{..., -3, -2, -1}"
+  generation_rule: "Materialize finite requested windows; domain itself is unbounded."
+five_term_families:
+  - id: TERM-FAM-001
+    name: Integer Terms
+    symbol: Z
+    domain: Z
+    generator: "n -> n for any integer"
+  - id: TERM-FAM-002
+    name: Natural/Counting Terms
+    symbol: N
+    domain: N
+    generator: "n -> n for n >= 0 under default convention"
+  - id: TERM-FAM-003
+    name: Rational Terms
+    symbol: Q
+    domain: Q
+    generator: "(p,q) -> reduced p/q, q != 0"
+  - id: TERM-FAM-004
+    name: Real Terms
+    symbol: R
+    domain: R
+    generator: "symbolic, exact algebraic, or bounded-precision representation"
+  - id: TERM-FAM-005
+    name: Complex Terms
+    symbol: C
+    domain: C
+    generator: "(a,b) -> a + b*i, i^2 = -1"
+infinite_dataset_policy: "Store generators and finite windows; do not claim a finite file enumerates an infinite set."
+record_id_rule: "TERM-{domain_code}-{canonical_key}"
