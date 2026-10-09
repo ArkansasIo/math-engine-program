@@ -103,7 +103,30 @@ paths:
         - { name: projectId, in: path, required: true, schema: { type: string, format: uuid } }
       responses:
         "200": { description: Branch list }
+    post:
+      summary: Create an empty project branch
+      parameters:
+        - { name: projectId, in: path, required: true, schema: { type: string, format: uuid } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name: { type: string, maxLength: 80 }
+      responses:
+        "201": { description: Branch created }
+        "409": { description: Branch name already exists }
   /revisions/{projectId}/branches/{branchId}/revisions:
+    get:
+      summary: List recent branch revisions
+      parameters:
+        - { name: projectId, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: branchId, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200": { description: Revision history }
     post:
       summary: Commit a mathematical document revision
       parameters:
