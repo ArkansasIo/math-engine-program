@@ -1,0 +1,3 @@
+#pragma once
+#include <cstdint>
+namespace vm1024 { enum class Opcode:uint16_t{IADD1024=0x1000,ISUB1024=0x1001,IMUL1024=0x1002,IDIV1024=0x1003,VADD1024=0x2000,VMUL1024=0x2001,DOT1024=0x2002,MATMUL1024=0x2003,QALLOC=0x3000,H=0x3001,X=0x3002,CNOT=0x3003,RZ=0x3004,MEASURE=0x3005,QFREE=0x3006}; struct Instruction{Opcode opcode;uint8_t a{},b{},c{};}; }
