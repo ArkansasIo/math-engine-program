@@ -1,43 +1,58 @@
 # Virtual Machine Program
 
-Hybrid 64-bit Windows-hosted virtual computer integrating the AxiomForge Math Engine with a simulated 1024-bit CPU/GPU and simulated quantum CPU/GPU.
+Hybrid 64-bit Windows-hosted virtual computer integrating the repository Math Engine with a simulated 1024-bit CPU/GPU and simulated quantum subsystem.
 
-## Architecture
+## Current implementation
 
-- Host: 64-bit Windows
-- vCPU: 1024-bit integer/vector datapath
-- vGPU: 1024-bit vector, matrix and graphics accelerator model
-- Quantum CPU/QPU: qubit-register, state-vector and circuit simulation
-- Quantum GPU/QPU accelerator: parallel quantum-state and circuit workloads
-- Unified Math Engine: classical, 1024-bit, complex, matrix, tensor and quantum mathematics
-- Tooling: assembler, instruction definitions, simulator, tests and examples
+- C++23/CMake engine library, CLI, and native Win32/GDI dashboard target.
+- 1024-bit unsigned value represented by sixteen 64-bit limbs, with carry-aware addition and XOR.
+- 16-lane vector addition and a baseline dot-product operation.
+- Bounds-checked virtual byte memory.
+- Initial V1024-QISA opcode decoder.
+- State-vector initialization, normalization, Hadamard, Pauli-X, CNOT, and measurement-probability functions.
+- Math Engine operation-name bridge.
+- CTest regression targets and Windows x64 GitHub Actions packaging workflow.
 
-The virtual machine is a software simulation. The 1024-bit and quantum processors do not imply native 1024-bit or quantum hardware in the Windows host.
+## Important scope statement
 
-## Integration
+This is a user-space software simulation, not a hypervisor. The 1024-bit and quantum processors are virtual models; they do not imply physical 1024-bit or quantum hardware. The dashboard is currently a visual shell, and not every toolbar action or telemetry panel is connected to live runtime state. The decoder exists, but a complete instruction execution loop and binary assembler are still future work.
 
-The VM consumes the repository's existing mathematical foundation under data/universal-mathematics/ and is designed to share mathematical operation IDs, schemas, deterministic datasets and verification metadata.
+## Build on Windows x64
 
-## Source layout
+Install Visual Studio 2022 with the C++ desktop workload and CMake 3.25 or later, then run from the repository root:
 
-virtual-machine-program/
-  include/vm1024/
-  include/quantum/
-  include/math/
-  src/cpu1024/
-  src/gpu1024/
-  src/quantum_cpu/
-  src/quantum_gpu/
-  src/memory/
-  src/machine/
-  src/math_bridge/
-  isa/
-  assembler/
-  firmware/
-  tests/
-  examples/
-  docs/
+```powershell
+cmake -S virtual-machine-program -B virtual-machine-program/build -G "Visual Studio 17 2022" -A x64
+cmake --build virtual-machine-program/build --config Release --parallel
+ctest --test-dir virtual-machine-program/build -C Release --output-on-failure
+```
 
-## Build direction
+Launch the desktop UI at `virtual-machine-program/build/Release/vm1024-dashboard.exe`, or the CLI at `virtual-machine-program/build/Release/vm1024-cli.exe`.
 
-Implementation target: C++23 with CMake on 64-bit Windows. Python remains available for dataset generation and validation, and SystemVerilog can later provide reference RTL for selected CPU/GPU blocks.
+## Build on Linux
+
+The engine and CLI are intended to be portable. The Win32 dashboard is built only on Windows.
+
+```sh
+cmake -S virtual-machine-program -B virtual-machine-program/build
+cmake --build virtual-machine-program/build --parallel
+ctest --test-dir virtual-machine-program/build --output-on-failure
+```
+
+## Windows test build artifact
+
+The GitHub Actions workflow at `.github/workflows/windows.yml` builds Release, runs CTest, and attempts to package the dashboard, CLI, and configuration as `VirtualMachine1024-Windows-x64.zip`. Treat the ZIP as verified only after the workflow succeeds. This conversation has not independently run MSVC or confirmed the artifact.
+
+## Repository map
+
+- `include/vm1024/`: integer/vector types, CPU/GPU, memory, decoder, runtime.
+- `include/quantum/`: quantum register, gates, measurement.
+- `include/math/`: Math Engine bridge API.
+- `src/`: implementation and entry points.
+- `tests/`: regression tests.
+- `assembler/`, `isa/`, `examples/`: initial ISA tooling and sample programs.
+- `assets/ui/`, `config/`: dashboard branding and settings.
+- `scripts/`: Windows build/package scripts.
+- `docs/`: architecture, design, API, tests, deployment, release and roadmap.
+
+See `docs/KNOWN_ISSUES.md` and `docs/ROADMAP.md` for explicit limitations and next steps.
