@@ -1,0 +1,15 @@
+build/
+out/
+dist/
+*.obj
+*.o
+*.a
+*.so
+*.dll
+*.exe
+*.pdb
+*.log
+.env
+.DS_Store
+.vscode/
+.idea/
