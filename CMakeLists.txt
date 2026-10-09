@@ -22,6 +22,9 @@ add_library(axiomforge_core
   src/math/numerical.cpp
   src/math/probability.cpp
   src/math/units.cpp
+  src/math/equations.cpp
+  src/math/interpolation.cpp
+  src/math/optimization.cpp
   src/api/api_info.cpp
   src/system/update_manager.cpp
   src/terminal/terminal.cpp
