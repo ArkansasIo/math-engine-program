@@ -16,6 +16,20 @@ jobs:
         run: ctest --test-dir build --output-on-failure
   api:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: axiomforge
+          POSTGRES_USER: axiomforge
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U axiomforge -d axiomforge"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
     defaults:
       run:
         working-directory: server
@@ -28,6 +42,13 @@ jobs:
       - run: npm run build
       - run: npm run typecheck
       - run: npm test
+      - name: Apply schema migrations to PostgreSQL
+        env:
+          PGPASSWORD: postgres
+        run: |
+          sudo apt-get update && sudo apt-get install -y postgresql-client
+          psql -h localhost -U axiomforge -d axiomforge -v ON_ERROR_STOP=1 -f migrations/001_initial.sql
+          psql -h localhost -U axiomforge -d axiomforge -v ON_ERROR_STOP=1 -f migrations/002_realtime_and_releases.sql
   client:
     runs-on: ubuntu-latest
     defaults:
