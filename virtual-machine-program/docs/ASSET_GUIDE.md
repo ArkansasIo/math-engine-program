@@ -1,0 +1,2 @@
+# Asset Guide
+UI assets live under assets/ui. logo.svg is the baseline application mark. Additional PNG/SVG icons, diagrams, fonts, and telemetry illustrations can be added without changing the engine. Runtime configuration lives under config. The native renderer intentionally keeps core UI drawing dependency-free for reliable Windows packaging.
