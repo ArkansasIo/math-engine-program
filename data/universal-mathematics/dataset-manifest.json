@@ -1,0 +1,50 @@
+{
+  "schema_version": "1.0.0",
+  "project": "AxiomForge / Universal Mathematics",
+  "registries": {
+    "term_families": {
+      "count": 5,
+      "path": "data/universal-mathematics/term-registry.json"
+    },
+    "difficulty_tiers": {
+      "count": 8,
+      "path": "data/universal-mathematics/difficulty-scale.json"
+    },
+    "dimension_registry": {
+      "record_count": 10000,
+      "source_artifact": "Universal_Mathematics_10K_Dimensions.json",
+      "schema": "data/universal-mathematics/dimension-registry.schema.json"
+    },
+    "problem_universe": {
+      "page_count": 700,
+      "source_artifact": "Universal_Mathematics_Problem_Universe_Master_700_Pages.docx",
+      "schema": "data/universal-mathematics/problem-record.schema.json"
+    }
+  },
+  "datasets": {
+    "integer_seed": {
+      "start": -10,
+      "end": 10,
+      "row_count": 21,
+      "generated_by": "data/universal-mathematics/term-generator.py"
+    },
+    "unbounded_integer_domain": {
+      "domain": "Z",
+      "materialization": "finite requested windows"
+    },
+    "rational_domain": {
+      "domain": "Q",
+      "materialization": "normalized numerator/denominator pairs"
+    },
+    "real_domain": {
+      "domain": "R",
+      "materialization": "symbolic/exact algebraic or bounded approximation"
+    },
+    "complex_domain": {
+      "domain": "C",
+      "materialization": "real/imaginary component representation"
+    }
+  },
+  "file_policy": "Only source definitions and compact seed data should be committed by default. Generate very large exports on request.",
+  "verification_policy": "External CAS outputs are not formal proofs. Store provenance and status separately."
+}
