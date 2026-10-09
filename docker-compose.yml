@@ -25,5 +25,16 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+  worker:
+    build: ./server
+    command: ["node", "dist/workers/workerMain.js"]
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgres://axiomforge:${POSTGRES_PASSWORD:-local-development-only}@postgres:5432/axiomforge
+      JWT_SECRET: ${JWT_SECRET:-local-development-secret-change-before-deploy-000000}
+      JWT_ISSUER: axiomforge
+    depends_on:
+      postgres:
+        condition: service_healthy
 volumes:
   axiomforge-db:
