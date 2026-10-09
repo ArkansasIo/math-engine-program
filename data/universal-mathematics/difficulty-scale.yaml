@@ -1,0 +1,20 @@
+version: "1.0.0"
+overall_difficulty: { min: 1, max: 1500 }
+dimension_score: { min: 0, max: 1000 }
+tiers:
+  - { code: E, name: Elementary, min: 1, max: 100 }
+  - { code: M, name: Middle School, min: 101, max: 200 }
+  - { code: H, name: High School, min: 201, max: 350 }
+  - { code: U, name: Undergraduate, min: 351, max: 550 }
+  - { code: G, name: Graduate, min: 551, max: 750 }
+  - { code: R, name: Research, min: 751, max: 900 }
+  - { code: F, name: Frontier, min: 901, max: 999 }
+  - { code: X, name: Ultra-Frontier, min: 1000, max: 1500 }
+dimensions:
+  - computational_complexity
+  - proof_complexity
+  - abstraction
+  - interdisciplinary_complexity
+  - prerequisite_depth
+  - verification_difficulty
+scoring_note: "Project-specific calibration labels, not universal objective measurements."
