@@ -13,7 +13,7 @@
 - [ ] Run and fix remote CI on the integrated branch; add API integration tests against a disposable PostgreSQL database.
 - [ ] Implement account verification, recovery, token revocation, robust abuse controls, security review, and observability.
 - [ ] Replace query-string WebSocket token with a one-time ticket; implement durable event replay and multi-instance pub/sub.
-- [ ] Complete branch create/rename/merge, revision diff, conflict resolution, review/release UI, and artifact signing.
+- [ ] Complete branch rename/merge, revision diff, conflict resolution, and signed release artifact production; initial branch creation and review/release management UI are implemented.
 - [ ] Add isolated build/test workers with resource limits; never execute user code in the API process.
 - [ ] Build full symbolic expression parsing, simplification, limits, differentiation/integration, equation solving, arbitrary precision, and theorem/rule engine.
 - [ ] Integrate Lua/Prolog with a permissioned plugin runtime and sandbox.
