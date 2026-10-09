@@ -1,0 +1,2 @@
+# Security Boundary
+The VM is a simulator, not a hypervisor. It does not execute guest-native instructions directly on Windows. Release builds must validate instruction operands, cap quantum allocations, bounds-check memory, reject unsafe paths, and run the complete test suite before packaging. Do not represent simulated 1024-bit or quantum hardware as physical hardware.
