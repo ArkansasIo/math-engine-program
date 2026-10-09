@@ -1,4 +1,5 @@
 #pragma once
+#include <cstddef>
 #include <complex>
 #include <vector>
 namespace quantum {
