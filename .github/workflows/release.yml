@@ -1,0 +1,47 @@
+name: Release
+on:
+  push:
+    tags:
+      - "v*"
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build and test C++ core
+        run: |
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build --parallel 2
+          ctest --test-dir build --output-on-failure
+          mkdir -p release/cpp
+          cp build/axiomforge_cli build/axiomforge_gui_shell release/cpp/
+          cp LICENSE README.md release/cpp/
+          tar -czf "axiomforge-cpp-${GITHUB_REF_NAME}.tar.gz" -C release/cpp .
+      - name: Build web client
+        working-directory: client
+        run: |
+          npm install
+          npm run typecheck
+          npm run build
+          tar -czf "../axiomforge-client-${GITHUB_REF_NAME}.tar.gz" -C dist .
+      - name: Build API server
+        working-directory: server
+        run: |
+          npm install
+          npm run build
+          mkdir -p ../release/api
+          cp -r dist migrations package.json ../release/api/
+          tar -czf "../axiomforge-api-${GITHUB_REF_NAME}.tar.gz" -C ../release/api .
+      - name: Publish GitHub release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            axiomforge-cpp-${{ github.ref_name }}.tar.gz
+            axiomforge-client-${{ github.ref_name }}.tar.gz
+            axiomforge-api-${{ github.ref_name }}.tar.gz
