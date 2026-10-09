@@ -41,7 +41,7 @@ docker compose up --build
 - API liveness: `http://localhost:8080/api/v1/health/live`
 - API readiness: `http://localhost:8080/api/v1/health/ready`
 
-The default Compose credentials/secrets are for local development only. Override `POSTGRES_PASSWORD` and `JWT_SECRET` before using the stack outside a private development environment. SQL initialization scripts run automatically only when the PostgreSQL data volume is created for the first time. For an existing database, apply migrations in order as described in [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
+The default Compose credentials/secrets are for local development only. Override `POSTGRES_PASSWORD` and `JWT_SECRET` before using the stack outside a private development environment. The Compose stack runs an idempotent migration service before starting the API and worker. The PostgreSQL initialization scripts also run on a fresh volume. For manual migration or troubleshooting, see [docs/DATABASE_MIGRATIONS.md](docs/DATABASE_MIGRATIONS.md).
 
 ## Project status and limits
 
