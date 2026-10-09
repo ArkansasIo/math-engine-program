@@ -1,3 +1,4 @@
 #include "quantum/Gates.hpp"
 #include <cmath>
+#include <utility>
 namespace quantum { void hadamard(QubitRegister&r,std::size_t q){auto&s=r.state_mutable();if(q>=r.qubits())return;const auto bit=std::size_t(1)<<q;const double k=1/std::sqrt(2.0);for(std::size_t i=0;i<s.size();i+=2*bit)for(std::size_t j=0;j<bit;++j){auto a=s[i+j],b=s[i+j+bit];s[i+j]=(a+b)*k;s[i+j+bit]=(a-b)*k;}} void pauli_x(QubitRegister&r,std::size_t q){auto&s=r.state_mutable();if(q>=r.qubits())return;const auto bit=std::size_t(1)<<q;for(std::size_t i=0;i<s.size();i+=2*bit)for(std::size_t j=0;j<bit;++j)std::swap(s[i+j],s[i+j+bit]);} void cnot(QubitRegister&r,std::size_t c,std::size_t t){auto&s=r.state_mutable();if(c>=r.qubits()||t>=r.qubits()||c==t)return;const auto cb=std::size_t(1)<<c,tb=std::size_t(1)<<t;for(std::size_t i=0;i<s.size();++i)if((i&cb)&&!(i&tb))std::swap(s[i],s[i|tb]);} }
