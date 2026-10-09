@@ -96,13 +96,6 @@ paths:
       responses:
         "200": { description: Membership updated }
         "403": { description: Owner required }
-    delete:
-      summary: Remove a non-owner member
-      parameters:
-        - { name: userId, in: path, required: true, schema: { type: string, format: uuid } }
-      responses:
-        "204": { description: Member removed }
-        "403": { description: Owner required }
   /revisions/{projectId}/branches:
     get:
       summary: List project branches
@@ -182,3 +175,28 @@ paths:
       responses:
         "200": { description: Job state }
         "404": { description: Job not found }
+  /projects/{projectId}/members/{userId}:
+    delete:
+      summary: Remove a non-owner member
+      parameters:
+        - { name: projectId, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: userId, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "204": { description: Member removed }
+        "403": { description: Owner required }
+  /revisions/{projectId}/reviews/{reviewId}:
+    patch:
+      summary: Update review status
+      parameters:
+        - { name: projectId, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: reviewId, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200": { description: Review status updated }
+  /revisions/{projectId}/releases/{releaseId}/publish:
+    post:
+      summary: Publish a draft release
+      parameters:
+        - { name: projectId, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: releaseId, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200": { description: Release published }
