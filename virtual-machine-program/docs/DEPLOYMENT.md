@@ -1,0 +1,2 @@
+# Windows Deployment
+Configure with Visual Studio 2022 x64 CMake, build Release, run CTest, then launch vm1024-cli.exe. The VM is a software simulation on Windows x64; 1024-bit and quantum processors are virtual models, not physical hardware. Production packaging should ship the Release binary, configuration, ISA metadata, and the Math Engine data required by the selected workload.
