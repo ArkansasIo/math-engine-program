@@ -1,12 +1,18 @@
-$ErrorActionPreference="Stop"
-$root=Split-Path $PSScriptRoot -Parent
-$build="$root/build"
-cmake --build $build --config Release
+$ErrorActionPreference = "Stop"
+$root = Split-Path $PSScriptRoot -Parent
+$build = Join-Path $root "build"
+cmake --build $build --config Release --parallel
 ctest --test-dir $build -C Release --output-on-failure
-$out="$root/dist/VirtualMachine1024"
+$out = Join-Path $root "dist/VirtualMachine1024-Windows-x64"
 New-Item -ItemType Directory -Force -Path $out | Out-Null
-Copy-Item "$build/Release/vm1024-cli.exe" $out
-Copy-Item "$root/config/vm.json" $out
-Copy-Item "$root/README.md" $out
-Compress-Archive -Path "$out/*" -DestinationPath "$root/dist/VirtualMachine1024-windows-x64.zip" -Force
-Write-Host "Package: $root/dist/VirtualMachine1024-windows-x64.zip"
+Copy-Item (Join-Path $build "Release/vm1024-dashboard.exe") $out
+Copy-Item (Join-Path $build "Release/vm1024-cli.exe") $out
+Copy-Item (Join-Path $root "config/vm.json") $out
+Copy-Item (Join-Path $root "config/ui.json") $out
+Copy-Item (Join-Path $root "README.md") $out
+Copy-Item (Join-Path $root "CHANGELOG.md") $out
+Copy-Item (Join-Path $root "assets") (Join-Path $out "assets") -Recurse -Force
+Copy-Item (Join-Path $root "docs") (Join-Path $out "docs") -Recurse -Force
+$zip = Join-Path $root "dist/VirtualMachine1024-Windows-x64.zip"
+Compress-Archive -Path (Join-Path $out "*") -DestinationPath $zip -Force
+Write-Host "Package: $zip"
