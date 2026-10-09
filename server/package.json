@@ -10,7 +10,8 @@
     "dev": "tsx watch src/index.ts",
     "test": "node --test",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "worker": "node dist/workers/workerMain.js"
+    "worker": "node dist/workers/workerMain.js",
+    "migrate": "node dist/db/migrate.js"
   },
   "engines": {
     "node": ">=22"
