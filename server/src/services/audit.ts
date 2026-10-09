@@ -1,0 +1,3 @@
+import {pool} from "../db/pool";
+export async function recordAudit(actorId:string,projectId:string|null,action:string,details:Record<string,unknown>={}):Promise<void>{try{await pool.query("INSERT INTO audit_log(actor_id,project_id,action,details) VALUES($1,$2,$3,$4)",[actorId,projectId,action,JSON.stringify(details)]);}catch(error){console.error("Audit record failed",error);}}
+export async function readProjectAudit(projectId:string,limit=100){const r=await pool.query("SELECT id,actor_id,action,details,created_at FROM audit_log WHERE project_id=$1 ORDER BY id DESC LIMIT $2",[projectId,Math.max(1,Math.min(100,limit))]);return r.rows;}
