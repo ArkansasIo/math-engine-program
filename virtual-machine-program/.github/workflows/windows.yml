@@ -38,3 +38,13 @@ jobs:
         with:
           name: VirtualMachine1024-Windows-x64
           path: virtual-machine-program/dist/VirtualMachine1024-Windows-x64.zip
+  build-linux-engine:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure portable engine and CLI
+        run: cmake -S virtual-machine-program -B virtual-machine-program/build -DCMAKE_BUILD_TYPE=Release
+      - name: Compile portable targets and tests
+        run: cmake --build virtual-machine-program/build --parallel
+      - name: Run portable regression suite
+        run: ctest --test-dir virtual-machine-program/build --output-on-failure
