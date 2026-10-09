@@ -11,6 +11,9 @@ TypeScript/Express service for authenticated projects, branch revision history, 
 - `GET/POST/PATCH /api/v1/revisions/:projectId/reviews`
 - `GET/POST /api/v1/revisions/:projectId/releases`, plus publish endpoint
 - `POST /api/v1/jobs`, `GET /api/v1/jobs/:jobId`
+- `POST /api/v1/math/evaluate` (authenticated bounded arithmetic/primality)
+- `GET /api/v1/events/:projectId` (authorized persisted event history)
+- `GET /api/v1/audit/:projectId` (owner-only audit trail)
 - `GET /api/v1/health/live`, `GET /api/v1/health/ready`
 - WebSocket endpoint: `/api/v1/ws`; send `{"type":"subscribe","projectId":"..."}` after connection.
 
