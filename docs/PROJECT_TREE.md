@@ -1,22 +1,27 @@
 # Project tree
 
-- apps/cli/: interactive C++ terminal using the query engine
-- apps/gui/: console GUI shell mock
-- include/axiomforge/core/: graph nodes, graph API, query engine
-- include/axiomforge/math/: arithmetic, number theory, polynomials, matrices, statistics, combinatorics, propositional logic, finite sets, vectors, geometry, numerical methods, probability, units, complex numbers
-- src/core/: graph and query engine implementation
-- src/math/: numerical and symbolic polynomial modules
-- include/axiomforge/api/ and src/api/: API metadata
-- include/axiomforge/system/ and src/system/: update manager foundation
-- include/axiomforge/ui/ and src/ui/: menu and window models
-- include/axiomforge/graphics/ and src/graphics/: renderer interface and mock
-- server/src/: TypeScript REST API, authentication, permissions, collaboration events, WebSocket relay, job worker
-- server/migrations/: PostgreSQL schema migrations and ordered migration runner
-- client/src/: React/TypeScript development workspace
-- api/: OpenAPI contract draft
-- prolog/: declarative starter rules
-- lua/: illustrative Lua sample, not runtime-integrated with C++
-- config/, build/, updates/: identity, runtime/update policy, build snapshot, example patch/release notes
-- scripts/: build identity and project validation helpers
-- tests/: C++ core tests
-- docs/: architecture, API, security, math modules, build and release notes
+- `apps/cli/`: C++ terminal routed through QueryEngine
+- `apps/gui/`: console GUI shell mock
+- `include/axiomforge/core/`, `src/core/`: graph types, knowledge graph, and query engine
+- `include/axiomforge/math/`, `src/math/`: arithmetic, number theory, polynomial calculus, matrices, statistics, combinatorics, logic, sets, vectors, geometry, numerical methods, probability, units, complex numbers, equation solving, interpolation, optimization
+- `include/axiomforge/api/`, `src/api/`: API metadata
+- `include/axiomforge/system/`, `src/system/`: update manager foundation
+- `include/axiomforge/ui/`, `src/ui/`: menu/window models
+- `include/axiomforge/graphics/`, `src/graphics/`: renderer interface and mock renderer
+- `server/src/auth/`: password/token authentication
+- `server/src/db/`: PostgreSQL pool and migration runner
+- `server/src/middleware/`: authentication, rate limits, request IDs, and errors
+- `server/src/routes/`: health, math, projects, members, revisions, events, audit, jobs, reviews, releases
+- `server/src/services/`: authorization, audit, event hub, math evaluation, job-state rules
+- `server/src/workers/`: bounded math/file-validation worker
+- `server/migrations/`: PostgreSQL schema and query indexes
+- `client/src/components/`, `client/src/utils/`: reusable React UI pieces and formatting/validation helpers
+- `client/src/`: React/TypeScript workspace with Math, Team, Debug, Build, Review modes
+- `api/`: OpenAPI contract
+- `prolog/`: declarative starter rules
+- `lua/`: illustrative Lua example; not integrated into C++ runtime
+- `config/`, `build/`, `updates/`: product/runtime/math/API/feature flags, build metadata, example patch/release notes
+- `scripts/`: project validation, build metadata, release validation, manifest validation
+- `tests/`: C++ math core tests
+- `docs/`: architecture, security, authentication, collaboration, operations, math coverage, CLI and release guides
+- `.github/workflows/`: CI and tag-triggered release packaging
