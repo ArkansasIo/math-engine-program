@@ -22,6 +22,16 @@
 - **Scripting/documentation:** starter Prolog rules, illustrative Lua example, OpenAPI draft, build identity and update-policy docs.
 - **Universal Mathematics data registry:** signed-integer generators and schemas, a five-family term registry, an eight-tier difficulty scale, dimension/problem-record schemas, and a reproducible dataset manifest in `data/universal-mathematics/`.
 
+## Universal Mathematics data registry
+
+The repository includes a reproducible registry layer in [`data/universal-mathematics/`](data/universal-mathematics/README.md): five number-term families, signed-integer range generation, the 1–1500 difficulty scale, dimension and problem schemas, a dataset manifest, and verification-status rules.
+
+Generate signed integer records on demand:
+```sh
+python3 data/universal-mathematics/term-generator.py --start -1000 --end 1000 --format csv --output integers.csv
+python3 data/universal-mathematics/term-generator.py --start -1000 --end 1000 --format jsonl --output integers.jsonl
+```
+
 ## Quick start
 
 ### C++23 core
