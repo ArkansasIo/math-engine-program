@@ -9,6 +9,7 @@ set(AXIOMFORGE_PRODUCT_ID "com.axiomforge.math-platform")
 configure_file(include/axiomforge/build_info.hpp.in generated/axiomforge/build_info.hpp @ONLY)
 add_library(axiomforge_core
   src/core/graph.cpp
+  src/core/query.cpp
   src/math/arithmetic.cpp
   src/math/number_theory.cpp
   src/api/api_info.cpp
