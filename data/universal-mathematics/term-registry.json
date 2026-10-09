@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0.0",
+  "title": "Universal Mathematics Infinite Term Registry",
+  "integer_domain": {
+    "symbol": "Z",
+    "definition": "Z = {..., -3, -2, -1, 0, 1, 2, 3, ...}",
+    "positive_integers": "{1,2,3,...}",
+    "negative_integers": "{...,-3,-2,-1}",
+    "nonnegative_integers": "{0,1,2,3,...}",
+    "nonpositive_integers": "{...,-3,-2,-1,0}",
+    "generation_rule": "For any requested integer n, emit a deterministic record for n; the domain has no finite upper or lower bound."
+  },
+  "five_term_families": [
+    {
+      "id": "TERM-FAM-001",
+      "name": "Integer Terms",
+      "symbol": "Z",
+      "definition": "Signed integer values ..., -3, -2, -1, 0, 1, 2, 3, ...",
+      "domain": "Z",
+      "generator": "n -> n for any integer n"
+    },
+    {
+      "id": "TERM-FAM-002",
+      "name": "Natural/Counting Terms",
+      "symbol": "N",
+      "definition": "Counting values; convention about including zero must be declared per context.",
+      "domain": "N",
+      "generator": "n -> n for n >= 0 under this registry's default convention"
+    },
+    {
+      "id": "TERM-FAM-003",
+      "name": "Rational Terms",
+      "symbol": "Q",
+      "definition": "Values representable as p/q for p integer and q nonzero integer.",
+      "domain": "Q",
+      "generator": "(p,q) -> p/q, q != 0; reduce by gcd and normalize denominator sign"
+    },
+    {
+      "id": "TERM-FAM-004",
+      "name": "Real Terms",
+      "symbol": "R",
+      "definition": "Real quantities including rational and irrational values.",
+      "domain": "R",
+      "generator": "symbolic expression, exact algebraic representation, or explicitly bounded approximation"
+    },
+    {
+      "id": "TERM-FAM-005",
+      "name": "Complex Terms",
+      "symbol": "C",
+      "definition": "Values a+bi for real a,b with i^2=-1.",
+      "domain": "C",
+      "generator": "(a,b) -> a + b*i"
+    }
+  ],
+  "record_id_rule": "TERM-{domain_code}-{signed_integer_or_canonical_key}",
+  "infinite_dataset_policy": "Store definitions, generators, constraints, and finite materialized windows rather than an impossible infinite list.",
+  "verification_statuses": [
+    "computed",
+    "symbolically_verified",
+    "numerically_verified",
+    "formally_proved",
+    "conjecture",
+    "counterexample_found",
+    "open",
+    "unknown"
+  ]
+}
