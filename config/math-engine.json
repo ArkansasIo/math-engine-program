@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "integer_type": "int64",
+  "floating_type": "IEEE-754 binary64",
+  "polynomial_coefficients": "ascending_power_order",
+  "default_tolerance": 1e-8,
+  "max_numerical_iterations": 1000,
+  "combinatorics_overflow": "throw",
+  "non_finite_inputs": "reject_when_validated",
+  "symbolic_expression_parser": "not_implemented",
+  "arbitrary_precision": "not_implemented"
+}
