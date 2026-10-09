@@ -1,7 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-function evaluate(input:{operation:string;a:number;b?:number}){if(!Number.isFinite(input.a))throw new Error("invalid input");if(input.operation==="prime"){if(!Number.isSafeInteger(input.a))throw new Error("invalid integer");if(input.a<2)return false;for(let d=2;d<=Math.sqrt(input.a);d++)if(input.a%d===0)return false;return true;}if(typeof input.b!=="number"||!Number.isFinite(input.b))throw new Error("invalid second input");if(input.operation==="add")return input.a+input.b;if(input.operation==="divide"){if(input.b===0)throw new Error("division by zero");return input.a/input.b;}throw new Error("unsupported operation");}
-test("safe math worker: addition",()=>assert.equal(evaluate({operation:"add",a:12,b:30}),42));
-test("safe math worker: prime",()=>assert.equal(evaluate({operation:"prime",a:97}),true));
-test("safe math worker: composite",()=>assert.equal(evaluate({operation:"prime",a:99}),false));
-test("safe math worker: division by zero rejected",()=>assert.throws(()=>evaluate({operation:"divide",a:1,b:0}),/division by zero/));
+import {evaluateMath} from "./services/mathEvaluator";
+test("math worker: addition",()=>assert.deepEqual(evaluateMath({operation:"add",a:12,b:30}),{operation:"add",value:42}));
+test("math worker: prime",()=>assert.deepEqual(evaluateMath({operation:"prime",a:97}),{value:97,prime:true}));
+test("math worker: composite",()=>assert.deepEqual(evaluateMath({operation:"prime",a:99}),{value:99,prime:false}));
+test("math worker: division by zero rejected",()=>assert.throws(()=>evaluateMath({operation:"divide",a:1,b:0}),/division by zero/));
+test("math worker: unreasonable prime workload rejected",()=>assert.throws(()=>evaluateMath({operation:"prime",a:1_000_000_000_001}),/worker limit/));
+test("math worker: non-finite result rejected",()=>assert.throws(()=>evaluateMath({operation:"multiply",a:Number.MAX_VALUE,b:2}),/not finite/));
