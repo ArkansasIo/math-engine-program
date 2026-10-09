@@ -1,0 +1,16 @@
+{
+  "application_name": "AxiomForge Mathematics Platform",
+  "short_name": "AxiomForge",
+  "developer": "AxiomForge Labs",
+  "product_id": "com.axiomforge.math-platform",
+  "desktop_application_id": "com.axiomforge.math-platform.desktop",
+  "api_name": "AxiomForge Math API",
+  "api_version": "v1",
+  "api_base_path": "/api/v1",
+  "version": "0.1.0-dev",
+  "build_number": 1001,
+  "build_id": "AXF-0.1.0-dev-1001",
+  "primary_language": "C++23",
+  "license": "MIT",
+  "release_channel": "development"
+}
