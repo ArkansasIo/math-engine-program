@@ -2,7 +2,7 @@
 
 - **C++23 core:** arithmetic, number theory, knowledge graph, query engine, terminal/UI abstractions.
 - **API service:** TypeScript/Express REST endpoints, authentication, project authorization, revision commits, job metadata, WebSocket event relay.
-- **PostgreSQL:** durable identity, membership, project, branch, revision, review, job, release, event, and audit tables.
+- **PostgreSQL:** durable identity, membership, project, branch, revision, review, job, release, collaboration event, and audit tables. Revision commits and important team/review/release operations are recorded in the audit trail.
 - **Clients:** CLI and console shell exist as development interfaces; a native graphical editor and browser client remain planned.
 - **Automation:** GitHub Actions compiles and tests the C++ core and type-checks/builds the API.
 
