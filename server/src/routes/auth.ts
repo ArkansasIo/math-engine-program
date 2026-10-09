@@ -1,0 +1,10 @@
+import {Router} from "express";
+import bcrypt from "bcryptjs";
+import {z} from "zod";
+import {pool} from "../db/pool";
+import {issueAccessToken} from "../auth/tokens";
+import {loginRateLimit} from "../middleware/rateLimit";
+export const authRouter=Router();
+const credentials=z.object({email:z.string().email().max(254).transform(v=>v.toLowerCase()),password:z.string().min(12).max(128)});
+authRouter.post("/register",async(req,res,next)=>{try{const v=credentials.parse(req.body);const hash=await bcrypt.hash(v.password,12);const r=await pool.query<{id:string;email:string}>("INSERT INTO users(email,password_hash) VALUES($1,$2) RETURNING id,email",[v.email,hash]);const u=r.rows[0]!;res.status(201).json({accessToken:issueAccessToken({sub:u.id,email:u.email}),user:{id:u.id,email:u.email}});}catch(e){if((e as {code?:string}).code==="23505"){res.status(409).json({error:"email_already_registered"});return;}next(e);}});
+authRouter.post("/login",loginRateLimit,async(req,res,next)=>{try{const v=credentials.parse(req.body);const r=await pool.query<{id:string;email:string;password_hash:string}>("SELECT id,email,password_hash FROM users WHERE email=$1",[v.email]);const u=r.rows[0];if(!u||!(await bcrypt.compare(v.password,u.password_hash))){res.status(401).json({error:"invalid_credentials"});return;}res.json({accessToken:issueAccessToken({sub:u.id,email:u.email}),user:{id:u.id,email:u.email}});}catch(e){next(e);}});
