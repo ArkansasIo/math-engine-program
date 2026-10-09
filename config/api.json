@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "name": "AxiomForge Math API",
+  "version": "v1",
+  "base_path": "/api/v1",
+  "default_port": 8080,
+  "body_limit_bytes": 1048576,
+  "access_token_ttl_seconds": 900,
+  "project_roles": [
+    "owner",
+    "editor",
+    "reviewer",
+    "viewer"
+  ],
+  "event_replay_limit": 100,
+  "audit_read_limit": 100,
+  "request_id_header": "X-Request-Id",
+  "tls": "configure TLS_KEY_PATH and TLS_CERT_PATH or use a trusted TLS proxy"
+}
