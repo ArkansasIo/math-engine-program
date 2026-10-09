@@ -24,8 +24,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-          cache-dependency-path: server/package.json
       - run: npm install
       - run: npm run build
       - run: npm run typecheck
+      - run: npm test
