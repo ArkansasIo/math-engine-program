@@ -9,7 +9,7 @@ export default function App(){
  const [a,setA]=useState("12"),[b,setB]=useState("30"),[operation,setOperation]=useState("add"),[job,setJob]=useState<Job|null>(null),[error,setError]=useState(""),[notice,setNotice]=useState("");
  async function refreshProjects(){const p=await projects();setProjectList(p);if(!project&&p[0])setProject(p[0]);}
  async function authenticate(e:React.FormEvent){e.preventDefault();setError("");try{const r=isRegister?await register(email,password):await login(email,password);setUser(r.user);await refreshProjects();}catch(err){setError(err instanceof Error?err.message:"Authentication failed");}}
- useEffect(()=>{if(!user||!project)return;branches(project.id).then(list=>{setBranchList(list);setBranch(list[0]??null)}).catch(e=>setError(String(e)));},[user,project?.id]);
+ useEffect(()=>{if(!user||!project)return;setBranch(null);setBranchList([]);branches(project.id).then(list=>{setBranchList(list);setBranch(list[0]??null)}).catch(e=>setError(String(e)));},[user,project?.id]);
  useEffect(()=>{if(!user||!project)return;const close=eventSocket(project.id,event=>{setNotice("Live collaboration event received");console.info("AxiomForge event",event)});return close;},[user,project?.id]);
  useEffect(()=>{if(!user||!project||!branch)return;revisionHistory(project.id,branch.id).then(setHistory).catch(e=>setError(String(e)));},[user,project?.id,branch?.id,branch?.head_revision_id]);
  async function makeProject(e:React.FormEvent){e.preventDefault();try{const r=await createProject(projectName,description);setProject(r.project);setBranch(r.defaultBranch);setBranchList([r.defaultBranch]);setProjectList(await projects());setProjectName("");setDescription("");setNotice("Project created");}catch(e){setError(String(e));}}
