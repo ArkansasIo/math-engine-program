@@ -3,7 +3,7 @@
 - apps/cli/: interactive C++ terminal using the query engine
 - apps/gui/: console GUI shell mock
 - include/axiomforge/core/: graph nodes, graph API, query engine
-- include/axiomforge/math/: arithmetic, number theory, polynomials, matrices, statistics, combinatorics, propositional logic, finite sets
+- include/axiomforge/math/: arithmetic, number theory, polynomials, matrices, statistics, combinatorics, propositional logic, finite sets, vectors, geometry, numerical methods, probability, units, complex numbers
 - src/core/: graph and query engine implementation
 - src/math/: numerical and symbolic polynomial modules
 - include/axiomforge/api/ and src/api/: API metadata
@@ -11,7 +11,7 @@
 - include/axiomforge/ui/ and src/ui/: menu and window models
 - include/axiomforge/graphics/ and src/graphics/: renderer interface and mock
 - server/src/: TypeScript REST API, authentication, permissions, collaboration events, WebSocket relay, job worker
-- server/migrations/: PostgreSQL schema migrations
+- server/migrations/: PostgreSQL schema migrations and ordered migration runner
 - client/src/: React/TypeScript development workspace
 - api/: OpenAPI contract draft
 - prolog/: declarative starter rules
