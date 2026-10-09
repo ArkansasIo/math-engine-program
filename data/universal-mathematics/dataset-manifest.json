@@ -45,6 +45,6 @@
       "materialization": "real/imaginary component representation"
     }
   },
-  "file_policy": "Only source definitions and compact seed data should be committed by default. Generate very large exports on request.",
+  "file_policy": "Commit source definitions and compact seed data by default. Generate very large exports on request.",
   "verification_policy": "External CAS outputs are not formal proofs. Store provenance and status separately."
 }
