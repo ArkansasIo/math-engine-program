@@ -1,0 +1,22 @@
+{
+  "environment": "development",
+  "log_level": "info",
+  "api": {
+    "version": "v1",
+    "base_path": "/api/v1",
+    "enabled": false
+  },
+  "scripting": {
+    "lua_enabled": false,
+    "prolog_enabled": false,
+    "mmscript_status": "planned"
+  },
+  "graphics": {
+    "backend": "mock",
+    "native_window_enabled": false
+  },
+  "updates": {
+    "network_check_enabled": false,
+    "signature_verification_enabled": false
+  }
+}
