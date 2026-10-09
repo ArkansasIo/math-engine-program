@@ -1,30 +1,36 @@
-name: VM Windows Build
+name: Virtual 1024 Windows Release Test
 on:
   push:
-    paths: ["virtual-machine-program/**"]
+    paths:
+      - "virtual-machine-program/**"
   pull_request:
-    paths: ["virtual-machine-program/**"]
+    paths:
+      - "virtual-machine-program/**"
+  workflow_dispatch:
 jobs:
-  build:
+  build-test-package:
     runs-on: windows-2022
     steps:
       - uses: actions/checkout@v4
-      - name: Configure
+      - name: Configure Release
         run: cmake -S virtual-machine-program -B virtual-machine-program/build -G "Visual Studio 17 2022" -A x64
-      - name: Build
-        run: cmake --build virtual-machine-program/build --config Release
-      - name: Test
+      - name: Compile all targets
+        run: cmake --build virtual-machine-program/build --config Release --parallel
+      - name: Run regression suite
         run: ctest --test-dir virtual-machine-program/build -C Release --output-on-failure
-      - name: Package dashboard
+      - name: Package desktop test build
         shell: pwsh
         run: |
-          New-Item -ItemType Directory -Force virtual-machine-program/dist | Out-Null
-          Copy-Item virtual-machine-program/build/Release/vm1024-dashboard.exe virtual-machine-program/dist/
-          Copy-Item virtual-machine-program/config/vm.json virtual-machine-program/dist/
-          Copy-Item virtual-machine-program/config/ui.json virtual-machine-program/dist/
-          Compress-Archive -Path virtual-machine-program/dist/* -DestinationPath virtual-machine-program/VirtualMachine1024-Windows-x64.zip -Force
-      - name: Upload dashboard artifact
+          $out = "virtual-machine-program/dist/VirtualMachine1024-Windows-x64"
+          New-Item -ItemType Directory -Force $out | Out-Null
+          Copy-Item "virtual-machine-program/build/Release/vm1024-dashboard.exe" "$out/"
+          Copy-Item "virtual-machine-program/build/Release/vm1024-cli.exe" "$out/"
+          Copy-Item "virtual-machine-program/config/vm.json" "$out/"
+          Copy-Item "virtual-machine-program/config/ui.json" "$out/"
+          Copy-Item "virtual-machine-program/examples/dashboard_demo.json" "$out/"
+          Compress-Archive -Path "$out/*" -DestinationPath "virtual-machine-program/dist/VirtualMachine1024-Windows-x64.zip" -Force
+      - name: Upload compiled artifact
         uses: actions/upload-artifact@v4
         with:
           name: VirtualMachine1024-Windows-x64
-          path: virtual-machine-program/VirtualMachine1024-Windows-x64.zip
+          path: virtual-machine-program/dist/VirtualMachine1024-Windows-x64.zip
