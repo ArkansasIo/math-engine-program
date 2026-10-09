@@ -1,0 +1,17 @@
+name: VM Windows Build
+on:
+  push:
+    paths: ["virtual-machine-program/**"]
+  pull_request:
+    paths: ["virtual-machine-program/**"]
+jobs:
+  build:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure
+        run: cmake -S virtual-machine-program -B virtual-machine-program/build -G "Visual Studio 17 2022" -A x64
+      - name: Build
+        run: cmake --build virtual-machine-program/build --config Release
+      - name: Test
+        run: ctest --test-dir virtual-machine-program/build -C Release --output-on-failure
