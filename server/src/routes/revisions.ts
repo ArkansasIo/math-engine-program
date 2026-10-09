@@ -62,6 +62,7 @@ revisionsRouter.post("/:projectId/branches/:branchId/revisions",async(req,res,ne
   const r=await client.query("INSERT INTO revisions(project_id,branch_id,parent_revision_id,author_id,message,document) VALUES($1,$2,$3,$4,$5,$6) RETURNING id,project_id,branch_id,parent_revision_id,author_id,message,document,created_at",[projectId,branchId,parent,req.principal!.sub,v.message,JSON.stringify(v.document)]);
   const revision=r.rows[0];
   await client.query("UPDATE branches SET head_revision_id=$1 WHERE id=$2",[revision.id,branchId]);
+  await client.query("INSERT INTO collaboration_events(project_id,actor_id,event_type,payload) VALUES($1,$2,'revision.created',$3)",[projectId,req.principal!.sub,JSON.stringify({branchId,revisionId:revision.id,parentRevisionId:parent})]);
   await client.query("COMMIT");
   eventHub.publish({type:"revision.created",projectId,actorId:req.principal!.sub,payload:{branchId,revisionId:revision.id,parentRevisionId:parent},createdAt:new Date().toISOString()});
   res.status(201).json({revision});
