@@ -7,7 +7,7 @@ export async function login(email:string,password:string){const r=await request<
 export async function register(email:string,password:string){const r=await request<{accessToken:string;user:User}>("/auth/register",{method:"POST",body:JSON.stringify({email,password})});setToken(r.accessToken);return r;}
 export async function projects(){return (await request<{projects:Project[]}>("/projects")).projects}
 export async function createProject(name:string,description:string){return request<{project:Project;defaultBranch:Branch}>("/projects",{method:"POST",body:JSON.stringify({name,description})})}
-export async function branches(projectId:string){return (await request<{branches:Branch[]}(`/revisions/${projectId}/branches`)).branches}
+export async function branches(projectId:string){return (await request<{branches:Branch[]}>(`/revisions/${projectId}/branches`)).branches}
 export async function commitRevision(projectId:string,branchId:string,message:string,document:Record<string,unknown>,expectedHeadId:string|null){return request<{revision:Revision}>(`/revisions/${projectId}/branches/${branchId}/revisions`,{method:"POST",body:JSON.stringify({message,document,expectedHeadId})})}
 export async function submitJob(projectId:string,operation:string,a:number,b?:number){return request<{job:Job}>("/jobs",{method:"POST",body:JSON.stringify({projectId,kind:"math.evaluate",input:{operation,a,...(b===undefined?{}:{b})}})})}
 export async function getJob(id:string){return request<{job:Job}>(`/jobs/${id}`)}
