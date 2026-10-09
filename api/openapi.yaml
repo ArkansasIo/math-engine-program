@@ -223,3 +223,40 @@ paths:
         - { name: releaseId, in: path, required: true, schema: { type: string, format: uuid } }
       responses:
         "200": { description: Release published }
+  /math/evaluate:
+    post:
+      summary: Evaluate a bounded arithmetic or primality operation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [operation, a]
+              properties:
+                operation: { type: string, enum: [add, subtract, multiply, divide, prime] }
+                a: { type: number }
+                b: { type: number }
+      responses:
+        "200": { description: Computation result }
+        "400": { description: Invalid input }
+        "422": { description: Mathematical operation failed }
+  /events/{projectId}:
+    get:
+      summary: Read persisted collaboration events after an event ID
+      parameters:
+        - { name: projectId, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: afterId, in: query, required: false, schema: { type: integer, minimum: 0, default: 0 } }
+        - { name: limit, in: query, required: false, schema: { type: integer, minimum: 1, maximum: 100, default: 100 } }
+      responses:
+        "200": { description: Event page }
+        "403": { description: Forbidden }
+  /audit/{projectId}:
+    get:
+      summary: Read a project audit trail (owner only)
+      parameters:
+        - { name: projectId, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: limit, in: query, required: false, schema: { type: integer, minimum: 1, maximum: 100, default: 100 } }
+      responses:
+        "200": { description: Audit entries }
+        "403": { description: Owner required }
