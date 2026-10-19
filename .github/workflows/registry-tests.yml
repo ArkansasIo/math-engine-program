@@ -1,0 +1,23 @@
+name: Universal Mathematics Registry Tests
+
+on:
+  push:
+    branches: [main, improve-registry-generator-tests]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  registry-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test deterministic integer-window generator
+        run: python3 -m unittest discover -s data/universal-mathematics/tests -v
+      - name: Validate dataset manifest JSON
+        run: python3 -m json.tool data/universal-mathematics/dataset-manifest.json > /dev/null
